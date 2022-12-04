@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: d11317dcf42fa8c4d90904585e049e56
+  m_SerializeEntries:
+  - m_GUID: c348712bda248c246b8c49b3db54643f
+    m_Address: Assets/Samples/XR Interaction Toolkit/2.0.4/Starter Assets/XRI Default
+      Input Actions.inputactions
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    <IsFolder>k__BackingField: 0
+    <BundleFileId>k__BackingField: 
+    <IsInResources>k__BackingField: 0
+    <IsInSceneList>k__BackingField: 0
+    <IsSubAsset>k__BackingField: 0
+    m_CheckedIsScene: 0
+    m_IsScene: 0
+    m_cachedAssetPath: Assets/Samples/XR Interaction Toolkit/2.0.4/Starter Assets/XRI
+      Default Input Actions.inputactions
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: cc5368c067951b44380ea8f254576374, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: c32cefbc29294934688e3cabedc250e0, type: 2}
+    - {fileID: 11400000, guid: 3385213e7ce7f1a45b768376cd74d5b7, type: 2}
+  m_FolderEntryCache: []
+  m_AssetCollectionEntryCache: []
