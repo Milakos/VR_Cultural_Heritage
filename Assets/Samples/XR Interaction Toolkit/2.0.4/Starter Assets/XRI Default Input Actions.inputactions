@@ -479,9 +479,9 @@
                     "name": "",
                     "id": "c191071a-af61-44cf-830e-173fb8903427",
                     "path": "<XRController>{LeftHand}/secondaryButton",
-                    "interactions": "Press",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Generic XR Controller",
                     "action": "Y Button",
                     "isComposite": false,
                     "isPartOfComposite": false
