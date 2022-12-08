@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1234335063363025200
+--- !u!114 &-6659979158916460377
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,31 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b924e2dad56384a8df2a1e111bb675, type: 3}
   m_Name: Vignette
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
   mode:
-    overrideState: 1
-    value: 1
+    overrideState: 0
+    value: 0
   color:
-    overrideState: 1
-    value: {r: 0.9150943, g: 0.038848326, b: 0.038848326, a: 1}
+    overrideState: 0
+    value: {r: 0, g: 0, b: 0, a: 1}
   center:
-    overrideState: 1
+    overrideState: 0
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.705
+    value: 0
   smoothness:
     overrideState: 1
-    value: 0.491
+    value: 0.01
   roundness:
     overrideState: 1
-    value: 0.747
+    value: 1
   rounded:
     overrideState: 1
-    value: 0
+    value: 1
   mask:
     overrideState: 0
     value: {fileID: 0}
@@ -57,9 +57,9 @@ MonoBehaviour:
   m_Name: Visuals Profile
   m_EditorClassIdentifier: 
   settings:
-  - {fileID: -1234335063363025200}
-  - {fileID: 3645524554449499856}
---- !u!114 &3645524554449499856
+  - {fileID: 8884946291840772712}
+  - {fileID: -6659979158916460377}
+--- !u!114 &8884946291840772712
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,28 +74,28 @@ MonoBehaviour:
   active: 1
   enabled:
     overrideState: 1
-    value: 0
+    value: 1
   intensity:
     overrideState: 1
-    value: 3.62
+    value: 19.18
   threshold:
     overrideState: 1
-    value: 4.02
+    value: 1.27
   softKnee:
-    overrideState: 1
-    value: 0.444
+    overrideState: 0
+    value: 0.5
   clamp:
-    overrideState: 1
+    overrideState: 0
     value: 65472
   diffusion:
-    overrideState: 1
+    overrideState: 0
     value: 7
   anamorphicRatio:
-    overrideState: 1
+    overrideState: 0
     value: 0
   color:
-    overrideState: 1
-    value: {r: 1, g: 0.07075471, b: 0.07075471, a: 1}
+    overrideState: 0
+    value: {r: 1, g: 1, b: 1, a: 1}
   fastMode:
     overrideState: 0
     value: 0

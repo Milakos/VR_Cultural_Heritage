@@ -6,12 +6,17 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(ActionBasedController))]
 public class HandController : MonoBehaviour
 {
+    public HandNoIK hand;
     ActionBasedController controller;
     XRInteractorLineVisual rayLineInteractor;
     HapticsController hapticsController;
+
+    [Header("Ray Colors")]
     public Color col = new Color(0,136,255);
     public Color col_ = new Color(31,71,106);
-    public HandNoIK hand;
+    
+
+    [Header("Hover and Grab Haptics Values")]
     [SerializeField] private float amplitudeHoverValue;
     [SerializeField] private float durationHover;
     [SerializeField] private float amplitudeGrabValue;

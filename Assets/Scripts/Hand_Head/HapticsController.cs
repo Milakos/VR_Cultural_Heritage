@@ -8,21 +8,23 @@ public class HapticsController : MonoBehaviour
 {
     
     [SerializeField] ActionBasedController leftController, rightController;
-    [SerializeField] private float hapticsAmplitude, hapticsDuation;
+    
+    [Header("Haptics Properties")]
+    [SerializeField] private float hapticsAmplitude, hapticsDuration;
     
     [ContextMenu("Send Haptics")] 
     public void SendHaptics(bool isLeft, float amplitude, float duration)
     {    
         hapticsAmplitude = amplitude;
-        hapticsDuation = duration;
+        hapticsDuration = duration;
         
         if (isLeft)
         {
-            leftController.SendHapticImpulse(hapticsAmplitude, hapticsDuation);
+            leftController.SendHapticImpulse(hapticsAmplitude, hapticsDuration);
         }
         else
         {
-            rightController.SendHapticImpulse(hapticsAmplitude, hapticsDuation);
+            rightController.SendHapticImpulse(hapticsAmplitude, hapticsDuration);
         }       
     }
 

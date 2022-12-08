@@ -10,6 +10,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private void OnEnable() 
+    {
+        FindObjectOfType<ButtonActionsController>().yButton += QuitGame;    
+    }
+
+    private void OnDisable() 
+    {
+        FindObjectOfType<ButtonActionsController>().yButton -= QuitGame; 
+    }
     public void QuitGame()
     {
         #if UNITY_EDITOR
