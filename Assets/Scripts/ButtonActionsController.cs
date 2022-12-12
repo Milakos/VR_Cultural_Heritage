@@ -4,25 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class ButtonActionsController : MonoBehaviour
 {
-
     /////////////////// /////// Event Declairation \\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\
 
     // Event with the right Stick for rotation
-    public delegate void mostionSickness(bool i);
-    public event mostionSickness rightStickRotateAction;
+    public delegate void UI_CanvasActivation(bool i);
+    public event UI_CanvasActivation activateCanvasUI;
     
     // Event that controls the left grip for blur image in teleportation
-    public delegate void mostionSicknessTeleport(bool i);
-    public event mostionSicknessTeleport leftGripAction;
+    public delegate void mostionSicknesVignnette(bool i);
+    public event mostionSicknesVignnette MotionSickVignetteTrigger;
 
     // Event that controlls the Switch between layers in teleportation with the X Button
-    public delegate void teleportSwitch(bool indexMask);
-    public event teleportSwitch xButton;
-
-    bool check = false;
 
     // Event that controls the exit of the game with the Y Button in left controller
     public event Action yButton;
@@ -33,16 +29,13 @@ public class ButtonActionsController : MonoBehaviour
     public InputActionProperty[] inputButtonAction;
     
     [Header("Controller Sticks")]
-    public InputActionProperty gripStick;
-
-    public int indexLayer = 0;
-
+    public InputActionProperty leftGrip;
+    public bool isArea;
     void Update()
     {
         ButtonControllersInput();
-        SwitchStickInput();
+        MotionSwitchHandler();
     }
-
 
     public void ButtonControllersInput()
     {
@@ -62,26 +55,10 @@ public class ButtonActionsController : MonoBehaviour
                 }
 
                 ///////// X BUTTON \\\\\\\\\
-                if(buttonXPressed)
+                if(buttonXPressed == true)
                 {
                     
-                    if (xButton != null)
-                    {
-                        check = !check;
-                        if(check == false)
-                        {
-                            xButton(true);
-                            // check = !check;
-                        }
-                        
-                        else
-                        {
-                            xButton(false);
-                            // check = !check;
-                        }
-                    }
-                }
-                
+                }                
                 ///////// X BUTTON \\\\\\\\\
 
                 if (buttonYPressed)
@@ -96,34 +73,24 @@ public class ButtonActionsController : MonoBehaviour
         }
     }
 
-    public void SwitchStickInput()
+    public void MotionSwitchHandler()
     {
-        // Right Stick /////////////////////
-        if(inputButtonAction[4].action.IsPressed())
+        isArea = FindObjectOfType<TeleportSwitch>().isInTeleportState;
+
+        if(inputButtonAction[4].action.IsPressed() || leftGrip.action.IsPressed() && isArea == true)
         {
-            if(rightStickRotateAction != null)
+            if(MotionSickVignetteTrigger != null)
             {
-                rightStickRotateAction(true);
-                print("Rotation");
+                MotionSickVignetteTrigger(true);
+            }
+            else
+            {
+                MotionSickVignetteTrigger(false);
             }
         }
         else
         {
-            rightStickRotateAction(false);
-        } 
-        //LeftStick ///////////////////////
-        if(gripStick.action.IsPressed())
-        {
-            if(leftGripAction != null)
-            {
-                leftGripAction(true);
-                print("Teleport");
-            }
+            MotionSickVignetteTrigger(false);
         }
-    }
-
-    public void SwitchTeleportwithButtonX()
-    {
-        
     }
 }

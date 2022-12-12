@@ -39,6 +39,7 @@ public class HandController : MonoBehaviour
         hand.SetTrigger(controller.activateAction.action.ReadValue<float>());
     }
 
+
     public void OnHoverLight(bool hovering)
     {
         rayLineInteractor.validColorGradient.SetKeys
@@ -66,6 +67,4 @@ public class HandController : MonoBehaviour
     {
         hapticsController.SendHaptics(isLeftHand, amplitudeGrabValue, durationGrab);
     }
-
-
 }

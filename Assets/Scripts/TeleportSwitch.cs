@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,47 +7,55 @@ public class TeleportSwitch : MonoBehaviour
 {
     [SerializeField] XRRayInteractor rayInteractor;
     [SerializeField] InteractionLayerMask[] mask;
-
-    private int index;
-    void Start()
+    public bool isTeleportingState;
+    public bool isInTeleportState;
+    private void Start()     
     {
-        rayInteractor = GetComponent<XRRayInteractor>();    
+        TryTeleport(true);
+        Rays();
     }
-    private void OnEnable() 
+    private void Update() 
     {
-        FindObjectOfType<ButtonActionsController>().xButton += SwitchLayerMask;
-    }
-    // private void OnDisable() 
-    // {
-    //     FindObjectOfType<ButtonActionsController>().xButton -= SwitchLayerMask;
-    // }
-    // public void SwitchLayerMaskTeleport()
-    // {      
-    //     int index = 0;
-    //     rayInteractor.interactionLayers = mask[index];
-    //     print("0");            
-    // }
-    // public void SwitchLayerMaskMixed()
-    // {
-    //     int index = 1;
-    //     rayInteractor.interactionLayers = mask[index];
-    //     print("1"); 
-    // }
-    public void SwitchLayerMask(bool intLayers)
-    {
-        if (intLayers == true)
+        if(CheckLayers() == true)
         {
-            index = 1;
-            rayInteractor.interactionLayers = mask[index];
-            print("INDEX = " + index);
+            isInTeleportState = true;
         }
-        else 
+    }
+    public void TryTeleport(bool Telep)
+    {
+        if (Telep == true)
         {
-            index = 0;
-            rayInteractor.interactionLayers = mask[index];
-            print("INDEX = " + index);
+            rayInteractor.interactionLayers = mask[0];
+            rayInteractor.lineType = XRRayInteractor.LineType.BezierCurve;
+        }
+        else
+        {
+            rayInteractor.interactionLayers = mask[1];
+            rayInteractor.lineType = XRRayInteractor.LineType.StraightLine;
         }
 
     }
+    public bool CheckLayers()
+    {
+        if(rayInteractor.interactionLayers == mask[0])
+        {
+            isTeleportingState = true;
+            print("Iseleporting");
+        }else
+        {
+            isTeleportingState = false;
+            print("IsNOTTseleporting");
+        }
+        return isTeleportingState;
+    }
+    public void Rays()
+    {
+        int mask = LayerMask.NameToLayer("Interactable"); 
 
+        if(Physics.Raycast(transform.position, Vector3.forward, Mathf.Infinity, mask))
+        {
+            print(mask);
+        }
+    }
+    
 }
