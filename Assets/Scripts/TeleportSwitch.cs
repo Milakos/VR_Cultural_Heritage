@@ -5,33 +5,52 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 public class TeleportSwitch : MonoBehaviour
 {
+    public delegate void ChangeText(bool change);
+    public event ChangeText changeButtonText;
+
     [SerializeField] XRRayInteractor rayInteractor;
     [SerializeField] InteractionLayerMask[] mask;
-    public bool isTeleportingState;
-    public bool isInTeleportState;
+    
+    [HideInInspector] public bool isTeleportingState;
+    [HideInInspector] public bool isInTeleportState;
+    int layerMask = 1 << 6;
+    [HideInInspector] public bool IsHittingPlane;
+
     private void Start()     
     {
         TryTeleport(true);
-        Rays();
     }
     private void Update() 
     {
+        TeleportingAreaCheck();
+
         if(CheckLayers() == true)
         {
             isInTeleportState = true;
         }
+        else
+        {
+            isInTeleportState = false;
+        }
+    }
+
+    private void FixedUpdate() 
+    {
+        // TeleportingAreaCheck();
     }
     public void TryTeleport(bool Telep)
     {
         if (Telep == true)
         {
             rayInteractor.interactionLayers = mask[0];
-            rayInteractor.lineType = XRRayInteractor.LineType.BezierCurve;
+            rayInteractor.lineType = XRRayInteractor.LineType.ProjectileCurve;
+            changeButtonText(true);
         }
         else
         {
             rayInteractor.interactionLayers = mask[1];
             rayInteractor.lineType = XRRayInteractor.LineType.StraightLine;
+            changeButtonText(false);
         }
 
     }
@@ -40,7 +59,7 @@ public class TeleportSwitch : MonoBehaviour
         if(rayInteractor.interactionLayers == mask[0])
         {
             isTeleportingState = true;
-            print("Iseleporting");
+            print("IsTeleporting");
         }else
         {
             isTeleportingState = false;
@@ -48,14 +67,18 @@ public class TeleportSwitch : MonoBehaviour
         }
         return isTeleportingState;
     }
-    public void Rays()
+    public bool TeleportingAreaCheck()
     {
-        int mask = LayerMask.NameToLayer("Interactable"); 
+        RaycastHit hit;  
 
-        if(Physics.Raycast(transform.position, Vector3.forward, Mathf.Infinity, mask))
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit , Mathf.Infinity, layerMask))
         {
-            print(mask);
+            IsHittingPlane = true;
+            print(hit.transform.name);
+        }else
+        {
+            IsHittingPlane = false;
         }
+        return IsHittingPlane;
     }
-    
 }

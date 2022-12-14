@@ -30,7 +30,8 @@ public class ButtonActionsController : MonoBehaviour
     
     [Header("Controller Sticks")]
     public InputActionProperty leftGrip;
-    public bool isArea;
+    private bool isArea;
+    private bool isHittingPlaneCheck;
     void Update()
     {
         ButtonControllersInput();
@@ -57,7 +58,11 @@ public class ButtonActionsController : MonoBehaviour
                 ///////// X BUTTON \\\\\\\\\
                 if(buttonXPressed == true)
                 {
-                    
+                    if(activateCanvasUI != null)
+                    {
+                        activateCanvasUI(true);
+                    }
+                    // 
                 }                
                 ///////// X BUTTON \\\\\\\\\
 
@@ -76,8 +81,9 @@ public class ButtonActionsController : MonoBehaviour
     public void MotionSwitchHandler()
     {
         isArea = FindObjectOfType<TeleportSwitch>().isInTeleportState;
+        isHittingPlaneCheck = FindObjectOfType<TeleportSwitch>().IsHittingPlane;
 
-        if(inputButtonAction[4].action.IsPressed() || leftGrip.action.IsPressed() && isArea == true)
+        if(inputButtonAction[4].action.IsPressed() || leftGrip.action.IsPressed() && isArea == true && isHittingPlaneCheck == true)
         {
             if(MotionSickVignetteTrigger != null)
             {
