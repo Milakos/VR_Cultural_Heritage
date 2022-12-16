@@ -83,7 +83,7 @@ public class ButtonActionsController : MonoBehaviour
         isArea = FindObjectOfType<TeleportSwitch>().isInTeleportState;
         isHittingPlaneCheck = FindObjectOfType<TeleportSwitch>().IsHittingPlane;
 
-        if(inputButtonAction[4].action.IsPressed() || leftGrip.action.IsPressed() && isArea == true && isHittingPlaneCheck == true)
+        if(inputButtonAction[4].action.IsPressed() || isArea == true && isHittingPlaneCheck == true && leftGrip.action.IsPressed())
         {
             if(MotionSickVignetteTrigger != null)
             {

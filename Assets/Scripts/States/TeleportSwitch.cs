@@ -5,8 +5,10 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 public class TeleportSwitch : MonoBehaviour
 {
-    public delegate void ChangeText(bool change);
-    public event ChangeText changeButtonText;
+    public delegate void ChangeEventHandler(bool change);
+    public event ChangeEventHandler changeButtonText;
+    public event ChangeEventHandler changeRecticlePrefabObject;
+
 
     [SerializeField] XRRayInteractor rayInteractor;
     [SerializeField] InteractionLayerMask[] mask;
@@ -33,24 +35,22 @@ public class TeleportSwitch : MonoBehaviour
             isInTeleportState = false;
         }
     }
-
-    private void FixedUpdate() 
-    {
-        // TeleportingAreaCheck();
-    }
     public void TryTeleport(bool Telep)
     {
         if (Telep == true)
         {
             rayInteractor.interactionLayers = mask[0];
-            rayInteractor.lineType = XRRayInteractor.LineType.ProjectileCurve;
+            rayInteractor.lineType = XRRayInteractor.LineType.StraightLine;
             changeButtonText(true);
+            // if(changeRecticlePrefabObject != null)
+            changeRecticlePrefabObject(true);
         }
         else
         {
             rayInteractor.interactionLayers = mask[1];
             rayInteractor.lineType = XRRayInteractor.LineType.StraightLine;
             changeButtonText(false);
+            changeRecticlePrefabObject(false);
         }
 
     }
