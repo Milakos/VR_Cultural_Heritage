@@ -13,6 +13,7 @@ public class ButtonActionsController : MonoBehaviour
     // Event with the right Stick for rotation
     public delegate void UI_CanvasActivation(bool i);
     public event UI_CanvasActivation activateCanvasUI;
+    public event UI_CanvasActivation UIHandCanvas;
     
     // Event that controls the left grip for blur image in teleportation
     public delegate void mostionSicknesVignnette(bool i);
@@ -46,6 +47,7 @@ public class ButtonActionsController : MonoBehaviour
                 bool buttonBPressed = inputButtonAction[1].action.IsPressed();
                 bool buttonXPressed = inputButtonAction[2].action.IsPressed();
                 bool buttonYPressed = inputButtonAction[3].action.IsPressed();
+                bool buttonSelectInProgress = inputButtonAction[5].action.inProgress;
 
                 if (buttonAPressed == true)
                     print("You Pressed " + inputButtonAction[0].action.name);
@@ -74,7 +76,31 @@ public class ButtonActionsController : MonoBehaviour
                     {
                         yButton();
                     }  
-                }  
+                }
+
+/*            if (!buttonSelectInProgress) 
+            {
+                if (UIHandCanvas != null) 
+                {
+                    UIHandCanvas(false);
+                    print("NO");
+                }
+ 
+            }*/
+          
+                if (UIHandCanvas != null)
+                {
+                    if (buttonSelectInProgress == true)
+                    {
+                        UIHandCanvas(true);
+                        print("Yes");
+                    }
+                    else 
+                    {
+                        UIHandCanvas(false);
+                        print("NO");
+                    }
+                }
         }
     }
 
