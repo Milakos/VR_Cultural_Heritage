@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ButtonActionsController : MonoBehaviour
-{
+{  
     /////////////////// /////// Event Declairation \\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\
 
     // Event with the right Stick for rotation
@@ -36,7 +36,7 @@ public class ButtonActionsController : MonoBehaviour
     void Update()
     {
         ButtonControllersInput();
-        MotionSwitchHandler();
+        MotionSwitchHandler();   
     }
 
     public void ButtonControllersInput()
@@ -48,7 +48,7 @@ public class ButtonActionsController : MonoBehaviour
                 bool buttonXPressed = inputButtonAction[2].action.IsPressed();
                 bool buttonYPressed = inputButtonAction[3].action.IsPressed();
                 bool buttonSelectInProgress = inputButtonAction[5].action.inProgress;
-
+            
                 if (buttonAPressed == true)
                     print("You Pressed " + inputButtonAction[0].action.name);
                 
@@ -77,28 +77,16 @@ public class ButtonActionsController : MonoBehaviour
                         yButton();
                     }  
                 }
-
-/*            if (!buttonSelectInProgress) 
-            {
-                if (UIHandCanvas != null) 
-                {
-                    UIHandCanvas(false);
-                    print("NO");
-                }
- 
-            }*/
-          
+                ///////// RIGHT TRIGGER \\\\\\\\\    
                 if (UIHandCanvas != null)
                 {
                     if (buttonSelectInProgress == true)
                     {
                         UIHandCanvas(true);
-                        print("Yes");
                     }
                     else 
                     {
                         UIHandCanvas(false);
-                        print("NO");
                     }
                 }
         }
