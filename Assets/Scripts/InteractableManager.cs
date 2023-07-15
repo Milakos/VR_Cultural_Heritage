@@ -4,53 +4,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 public class InteractableManager : MonoBehaviour
-{
-    [SerializeField] SO Item;
-    
-    Animator anim;
-    
-    [SerializeField] XRGrabInteractable controller;
+{   
+    public XRBaseInteractor[] baseInteractors;
 
-    public List<GameObject> hands = new List<GameObject>();
-    XRBaseInteractor interactor;
+    private List<GameObject> hands = new List<GameObject>();
 
-    public InteractionLayerMask mask;
-    private void Awake() 
+    [SerializeField] private XRGrabInteractable baseInteractable;
+
+    [SerializeField] private SO Item;
+    
+
+    private Animator anim;
+
+    [SerializeField] private InteractionLayerMask mask;
+
+    private void Awake()
     {
-        controller = GetComponent<XRGrabInteractable>();
+        baseInteractable = GetComponent<XRGrabInteractable>();
         anim = GetComponent<Animator>();
 
+        hands.Add(GameObject.Find("RightHandGrab"));
+        hands.Add(GameObject.Find("LeftHandGrab"));
     }
     private void Start()
     {
-        hands.Add(GameObject.Find("LeftHandGrab"));
-        hands.Add(GameObject.Find("RightHandGrab"));
-        
-        foreach (var hand in hands) 
-        {
-            gameObject.SetActive(false);
-        }
+        DeactivateHands(false);
+
+        if (baseInteractors == null) { return; }
+
+        baseInteractors = FindObjectsOfType<XRBaseInteractor>();
     }
-    public void HandChoose(GameObject Hand)
-    {
-        if (interactor.name == "LeftHand")
+
+    public void DeactivateHands(bool active)
+    {      
+        foreach (GameObject hand in hands)
         {
-            hands[1] = Hand;
+            hand.SetActive(active);
         }
-        else 
+        active = false; 
+    }
+
+    public void HandSelectChoose(bool handActivation)
+    {
+        if (baseInteractors != null) 
         {
-            hands[0] = Hand;
+            if (baseInteractors[0].IsSelecting(baseInteractable))
+            {
+                hands[0].SetActive(handActivation);
+                print("IsSelectingRight");
+            }
+            else if (baseInteractors[1].IsSelecting(baseInteractable)) 
+            {
+                hands[1].SetActive(handActivation);
+                print("IsSelectingLeft");
+            }
         }
     }
 
     public void OnSocketDetach()
-    {     
-        controller.interactionLayers = mask;
+    {
+        baseInteractable.interactionLayers = mask;
         print("Deactivate cube");
     }
     public void StopEmissionEffectAnimation(bool grabbingBool)
     {
         anim.SetBool("isGrabbed", grabbingBool);
     }
-
 }

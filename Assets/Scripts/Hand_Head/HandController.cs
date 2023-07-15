@@ -7,6 +7,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(ActionBasedController))]
 public class HandController : MonoBehaviour
 {
+
+
     public HandNoIK hand;
     ActionBasedController controller;
     XRInteractorLineVisual rayLineInteractor;

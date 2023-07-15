@@ -34,14 +34,14 @@ public class MotionSick : MonoBehaviour
             vignette.active = true;
             vignette.intensity.value = 1f;
             vignette.smoothness.value = 1f;
-            print("VIgnette");
+            
         }
         else
         {
             vignette.active = false;
             vignette.intensity.value = 0f;
             vignette.smoothness.value = 0f;
-            print("no Vigniette");
+            
         }
     }
 }

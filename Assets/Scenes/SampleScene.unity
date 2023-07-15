@@ -489,7 +489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &79242091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,9 +756,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0de887c280fef9244af8788830091e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseInteractors: []
+  baseInteractable: {fileID: 0}
   Item: {fileID: 0}
-  controller: {fileID: 79242091}
-  hands: []
   mask:
     m_Bits: 64
 --- !u!1 &89643673
@@ -1960,7 +1960,7 @@ GameObject:
   - component: {fileID: 2434100645006914790}
   - component: {fileID: 2434100645006914791}
   m_Layer: 0
-  m_Name: RightHand Controller
+  m_Name: RightHandController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2644,7 +2644,7 @@ GameObject:
   - component: {fileID: 685631473}
   - component: {fileID: 685631477}
   m_Layer: 10
-  m_Name: GI_BranchTree
+  m_Name: Tree Branch
   m_TagString: Branch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2716,25 +2716,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 3499752895096758841}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+      - m_Target: {fileID: 685631477}
+        m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
+        m_MethodName: HandSelectChoose
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 0
-      - m_Target: {fileID: 685631477}
-        m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
-        m_MethodName: HandChoose
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2779,9 +2767,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3499752895096758841}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+      - m_Target: {fileID: 685631477}
+        m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
+        m_MethodName: DeactivateHands
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2790,7 +2778,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -2918,9 +2906,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0de887c280fef9244af8788830091e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseInteractors: []
+  baseInteractable: {fileID: 685631473}
   Item: {fileID: 11400000, guid: b3dfd173e73a3d74fa0098d6c58e2c48, type: 2}
-  controller: {fileID: 685631473}
-  hands: []
   mask:
     m_Bits: 64
 --- !u!95 &685631478
@@ -3654,7 +3642,7 @@ GameObject:
   - component: {fileID: 800144830}
   m_Layer: 0
   m_Name: LeftHandGrab
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3666,8 +3654,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 800144829}
-  m_LocalRotation: {x: -0.026527788, y: 0.027410977, z: 0.6820285, w: -0.7303301}
-  m_LocalPosition: {x: 0.0221, y: 0.0089, z: -0.1245}
+  m_LocalRotation: {x: 0.027993534, y: 0.025912294, z: -0.7453018, w: -0.66563517}
+  m_LocalPosition: {x: 0.049754225, y: -0.020962425, z: -0.11274999}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3675,7 +3663,7 @@ Transform:
   - {fileID: 327198182}
   m_Father: {fileID: 743303475}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0.078, y: -4.372, z: -86.086}
+  m_LocalEulerAnglesHint: {x: 0.078, y: -4.372, z: 96.46}
 --- !u!1 &818551376
 GameObject:
   m_ObjectHideFlags: 0
@@ -5795,7 +5783,7 @@ GameObject:
   - component: {fileID: 8258185661830405007}
   - component: {fileID: 8258185661830405008}
   m_Layer: 0
-  m_Name: LeftHand Controller
+  m_Name: LeftHandController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9635,7 +9623,7 @@ GameObject:
   - component: {fileID: 4312845473906129027}
   m_Layer: 0
   m_Name: RightHandGrab
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
