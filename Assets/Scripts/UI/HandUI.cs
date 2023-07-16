@@ -1,22 +1,28 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class HandUI : MonoBehaviour
 {
+
     XRGrabInteractable[] grabItem;
     private List<XRGrabInteractable> items = new List<XRGrabInteractable>();
     ButtonActionsController controller;
     FollowVision followVision;
-    Animator anim;
+    [HideInInspector] public Animator anim;
 
-    [SerializeField] private Transform cameraTransform;  
-    [SerializeField] private GameObject canvas;    
+    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private GameObject canvas;
     [SerializeField] private float offset;
-    
+
     bool isCentered = false;
+
+    [SerializeField] private Image image;
+    private TMP_Text text;
 
     private void Awake()
     {
@@ -24,6 +30,8 @@ public class HandUI : MonoBehaviour
         grabItem = FindObjectsOfType<XRGrabInteractable>();
         anim = GetComponentInChildren<Animator>();
         followVision = GetComponentInChildren<FollowVision>();
+
+        text = GetComponentInChildren<TMP_Text>();
     }
     private void OnEnable()
     {
@@ -35,10 +43,7 @@ public class HandUI : MonoBehaviour
         controller.UIHandCanvas -= ActivateHandUI;
         StopCoroutine(CloseUITime());
     }
-    private void Update()
-    {
-        isGrabbedNotifier();
-    }   
+ 
     #region FollowVision
     private Vector3 FindTargetPosition()
     {
@@ -100,13 +105,14 @@ public class HandUI : MonoBehaviour
         {
             if (interactable.isSelected) 
             {
+                image.sprite = interactable.gameObject.GetComponent<InteractableManager>().Item.Icon;
                 return true;
             }
         }
         return false;   
     }
 
-    private IEnumerator CloseUITime() 
+    public IEnumerator CloseUITime() 
     {
         if(anim != null)
             anim.SetBool("HandUIActivated", true);

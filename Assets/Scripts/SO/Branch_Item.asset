@@ -15,5 +15,7 @@ MonoBehaviour:
   ItemID: 0
   type: 0
   ItemName: Tree Branch
-  Icon: {fileID: 0}
-  Description: 
+  CanStored: 1
+  CanUseAsTool: 0
+  Icon: {fileID: 21300000, guid: f2901efd8bb16bc408ad37f017fbf9bc, type: 3}
+  Description: A tree branch that can be used to Light a bonfire!

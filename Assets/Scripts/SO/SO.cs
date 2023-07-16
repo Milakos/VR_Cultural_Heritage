@@ -10,6 +10,8 @@ public class SO : ScriptableObject
     public int ItemID;
     public Type type;
     public string ItemName;
+    public bool CanStored;
+    public bool CanUseAsTool;
 
     [Header("Properties")]
     [Space(10)]

@@ -24,6 +24,8 @@ public class ButtonActionsController : MonoBehaviour
     // Event that controls the exit of the game with the Y Button in left controller
     public event Action yButton;
 
+    public event Action aButton;
+
     /////////////////// /////// Event Declairation \\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\
 
     [Header("Buttons")]
@@ -43,22 +45,32 @@ public class ButtonActionsController : MonoBehaviour
     {
         foreach (var item in inputButtonAction)
         {
-                bool buttonAPressed = inputButtonAction[0].action.IsPressed();                
-                bool buttonBPressed = inputButtonAction[1].action.IsPressed();
+                bool buttonAPressed = inputButtonAction[1].action.IsPressed();                
+                bool buttonBPressed = inputButtonAction[0].action.IsPressed();
                 bool buttonXPressed = inputButtonAction[2].action.IsPressed();
                 bool buttonYPressed = inputButtonAction[3].action.IsPressed();
                 bool buttonSelectInProgress = inputButtonAction[5].action.inProgress;
-            
-                if (buttonAPressed == true)
-                    print("You Pressed " + inputButtonAction[0].action.name);
+
                 
                 if (buttonBPressed == true)
                 {
-                    print("You Pressed " + inputButtonAction[1].action.name);
+                    print("You Pressed " + inputButtonAction[0].action.name);
                 }
+            ///////// A BUTTON \\\\\\\\\
 
-                ///////// X BUTTON \\\\\\\\\
-                if(buttonXPressed == true)
+            if (buttonAPressed)
+            {
+                print("You Pressed " + inputButtonAction[1].action.name);
+
+                if (aButton != null)
+                {
+                    aButton();
+                }
+            }
+
+
+            ///////// X BUTTON \\\\\\\\\
+            if (buttonXPressed == true)
                 {
                     if(activateCanvasUI != null)
                     {
@@ -66,8 +78,8 @@ public class ButtonActionsController : MonoBehaviour
                     }
                     // 
                 }                
-                ///////// X BUTTON \\\\\\\\\
 
+                ///////// Y BUTTON \\\\\\\\\
                 if (buttonYPressed)
                 {
                     print("You Pressed " + inputButtonAction[3].action.name);
