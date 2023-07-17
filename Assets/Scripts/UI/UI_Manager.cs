@@ -8,6 +8,9 @@ public class UI_Manager : MonoBehaviour
 {
     [SerializeField] private GameObject obj;
     [SerializeField] private TMP_Text textTeleport;
+    [SerializeField] private Toggle btn;
+    [SerializeField] private Image image;
+    
     private void Awake() 
     {    
         textTeleport = GetComponentInChildren<TMP_Text>();    
@@ -37,4 +40,14 @@ public class UI_Manager : MonoBehaviour
         else
             obj.SetActive(false);
     }
+
+    public void ChangeInventoryButtonImage(Sprite item) 
+    {
+        image.sprite = item;
+    }
+    public void ClearInventoryButtonImage() 
+    {
+        image.sprite = null;
+    }
+
 }

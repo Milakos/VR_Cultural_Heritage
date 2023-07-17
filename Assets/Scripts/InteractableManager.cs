@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(XRGrabInteractable))]
-public class InteractableManager : MonoBehaviour
+public class InteractableManager : MonoBehaviour, IItemInventory
 {    
     [Header("Item Properties")][SerializeField] 
     public SO Item; // The Scripatble object item that this script will inherit properties
@@ -30,6 +30,7 @@ public class InteractableManager : MonoBehaviour
     private const bool Deactivate = false; // A Const bool that always have to be False for hand deactivation
     private const int LayerInteractable = 10;
     private const int LayerHands = 12;
+    [SerializeField] private string AnimationNameHash = "";
     /// <summary>
     /// 
     /// </summary>
@@ -37,9 +38,15 @@ public class InteractableManager : MonoBehaviour
     private Rigidbody rb; // Reference of Rigidbody component
     
     private ButtonActionsController controller;
-    private void Awake()
+
+    public delegate void MountInInventory(SO item);
+    public event MountInInventory MountInventory;
+    Inventory inventory;
+    private void OnEnable()
     {       
         controller = FindObjectOfType<ButtonActionsController>();
+        inventory = FindObjectOfType<Inventory>();
+        inventory.interactables.Add(this);
 
         baseInteractable = GetComponent<XRGrabInteractable>();
         anim = GetComponent<Animator>();
@@ -55,6 +62,14 @@ public class InteractableManager : MonoBehaviour
         baseInteractable.selectExited.AddListener(OnSelectExit);
 
         DeactivateHands();
+
+        
+    }
+    private void OnDisable()
+    {
+        inventory.interactables.Remove(this);
+        baseInteractable.selectEntered.RemoveListener(OnSelectEnter);
+        baseInteractable.selectExited.RemoveListener(OnSelectExit);
     }
     // Method that Triggers all the functionality when an interactor grabs this interactable
     private void OnSelectEnter(SelectEnterEventArgs EnterEvents)
@@ -62,15 +77,17 @@ public class InteractableManager : MonoBehaviour
         ItemsSocket.SetActive(true);
         HandSelectChoose(true);
         StopEmissionEffectAnimation(true);
-        controller.aButton += MountInInventory;
+        controller.aButton += StoreInInventory;
     }
     // Method that Triggers all the functionality when an interactor release this interactable
     private void OnSelectExit(SelectExitEventArgs ExitEvents)
     {
+        ItemsSocket.SetActive(false);
         HandSelectChoose(false);
         DeactivateHands();
         StopEmissionEffectAnimation(false);
         ApplyPhysicsToInteractable();
+        controller.aButton -= StoreInInventory;
     }
 
     // Function that checks which of the two interactors aka hands interact with this gameobject
@@ -121,22 +138,7 @@ public class InteractableManager : MonoBehaviour
         rb.AddRelativeForce(Vector3.down, ForceMode.Force);
         Physics.IgnoreLayerCollision(LayerInteractable, LayerHands, true);
     }
-    private void MountInInventory() 
-    {
-        if (Item != null) 
-        {
-            if (Item.CanStored)
-            {
-                DeactivateHands();
-                FindObjectOfType<HandUI>().anim.SetBool("HandUIActivated", true);
-                anim.Play("StoreInInventory");
-            }
-            else 
-            {
-                FindObjectOfType<HandUI>().anim.SetBool("HandUIActivated", true);
-            }
-        }
-    }
+
     /// <summary>
     /// Function that Destoys the gamobject that this component is attached to through animation events
     /// </summary>
@@ -144,4 +146,53 @@ public class InteractableManager : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public bool CanUsedAsATool()
+    {
+        return Item.CanUseAsTool;
+    }
+    public bool CanBeStored()
+    {
+        return Item.CanStored;
+    }
+    public void Use()
+    {
+        if (!CanUsedAsATool()) { return; }
+
+        if (CanUsedAsATool() == true) 
+        {
+            //TODO add some functionality for using the tool
+        }
+    }
+
+    public void StoreInInventory()
+    {
+        if (!CanBeStored()) { return; }
+        
+        if (CanBeStored() == true)
+        {
+            print("TEST");
+            DeactivateHands();
+            FindObjectOfType<HandUI>().anim.SetBool("HandUIActivated", true);
+            anim.Play(AnimationNameHash);
+            //TODO add some functionality that puts the data in the inventory list
+            if (MountInventory != null) 
+            {               
+                MountInventory?.Invoke(Item);
+            }
+            
+        }
+        else
+        {           
+            FindObjectOfType<HandUI>().anim.SetBool("HandUIActivated", true);
+        }
+
+        controller.aButton -= StoreInInventory;
+    }
+
+    public void RemoveFromInventory()
+    {
+    }
+
+
 }

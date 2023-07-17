@@ -26,6 +26,8 @@ public class ButtonActionsController : MonoBehaviour
 
     public event Action aButton;
 
+    public event Action bButton;
+
     /////////////////// /////// Event Declairation \\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\
 
     [Header("Buttons")]
@@ -43,7 +45,7 @@ public class ButtonActionsController : MonoBehaviour
 
     public void ButtonControllersInput()
     {
-        foreach (var item in inputButtonAction)
+        foreach (var buttons in inputButtonAction)
         {
                 bool buttonAPressed = inputButtonAction[1].action.IsPressed();                
                 bool buttonBPressed = inputButtonAction[0].action.IsPressed();
@@ -51,11 +53,17 @@ public class ButtonActionsController : MonoBehaviour
                 bool buttonYPressed = inputButtonAction[3].action.IsPressed();
                 bool buttonSelectInProgress = inputButtonAction[5].action.inProgress;
 
-                
-                if (buttonBPressed == true)
+            ///////// B BUTTON \\\\\\\\
+            
+            if (buttonBPressed)
+            {
+                print("You Pressed " + inputButtonAction[1].action.name);
+
+                if (bButton != null)
                 {
-                    print("You Pressed " + inputButtonAction[0].action.name);
+                    bButton?.Invoke();
                 }
+            }
             ///////// A BUTTON \\\\\\\\\
 
             if (buttonAPressed)
@@ -76,7 +84,7 @@ public class ButtonActionsController : MonoBehaviour
                     {
                         activateCanvasUI(true);
                     }
-                    // 
+                    
                 }                
 
                 ///////// Y BUTTON \\\\\\\\\

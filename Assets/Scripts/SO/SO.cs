@@ -7,16 +7,18 @@ public class SO : ScriptableObject
 {    
     [Header("Item Identity")]
     [Space(10)]
-    public int ItemID;
-    public Type type;
     public string ItemName;
+    public Type type;
+    public GameObject prefabGrabbable;
+    public GameObject prefabSocket;
+    
     public bool CanStored;
     public bool CanUseAsTool;
 
     [Header("Properties")]
     [Space(10)]
     public Sprite Icon;
-
+    [Space(5)]
     [TextArea(0,10)]
     public string Description;
 }
