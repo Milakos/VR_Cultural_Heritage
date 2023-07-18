@@ -15,10 +15,11 @@ public class MainMenu : MonoBehaviour
         FindObjectOfType<ButtonActionsController>().yButton += QuitGame;    
     }
 
-    private void OnDisable() 
+/*    private void OnDisable() 
     {
+        
         FindObjectOfType<ButtonActionsController>().yButton -= QuitGame; 
-    }
+    }*/
     public void QuitGame()
     {
         #if UNITY_EDITOR

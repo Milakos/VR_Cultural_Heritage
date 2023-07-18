@@ -10,53 +10,54 @@ public class Inventory : MonoBehaviour
     ButtonManager btnManager;
     
     public List<InteractableManager> interactables = new List<InteractableManager>();
-    
+
+    public bool HasItem { get; private set; }
+
+
     private void Awake()
     {
         btnManager = FindObjectOfType<ButtonManager>();
         uiManager = FindObjectOfType<UI_Manager>();
-       
-    }
-    private void OnEnable()
-    {
-        foreach (InteractableManager manager in interactables) 
+
+        foreach (InteractableManager manager in interactables)
         {
             manager.MountInventory += AddItem;
         }
-        
     }
-    private void OnDisable()
-    {
-        foreach (InteractableManager manager in interactables)
-        {
-            manager.MountInventory -= AddItem;
-        }
-    }
-
     public void AddItem(SO item) 
     {
         items.Add(item);
+        HasItem = true;
+
         uiManager.ChangeInventoryButtonImage(item.Icon);
         btnManager.item = item;
     }
     public void RemoveItem(SO item) 
-    {
-        items.Remove(item);
-        uiManager.ClearInventoryButtonImage();
-        btnManager.ClearSOReference();
+    {        
+        if (items.Count <= 1) 
+        {           
+            items.Remove(item);
+            uiManager.ClearInventoryButtonImage();
+            btnManager.ClearSOReference();
+        }
+        if (items.Count > 0) 
+        {
+            items.Remove(item);
+        }
     }
-    public bool HasItem(SO item) 
-    {
-        return item;
-    }
+
     public void GetItem() 
     {
         SO item = btnManager.item;
 
-        if (HasItem(item) == true) 
+        if (HasItem)
         {
             RemoveItem(item);
-            GameObject obj = Instantiate(item.prefabGrabbable, Vector3.zero ,Quaternion.identity);
+            print("REMOVE");
+        }
+        if (!HasItem) 
+        {
+            print("No Item");
         }
     }
 

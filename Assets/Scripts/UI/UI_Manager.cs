@@ -8,7 +8,7 @@ public class UI_Manager : MonoBehaviour
 {
     [SerializeField] private GameObject obj;
     [SerializeField] private TMP_Text textTeleport;
-    [SerializeField] private Toggle btn;
+    [SerializeField] private Button btn;
     [SerializeField] private Image image;
     
     private void Awake() 

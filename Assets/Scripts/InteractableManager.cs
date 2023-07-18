@@ -6,22 +6,22 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(XRGrabInteractable))]
 public class InteractableManager : MonoBehaviour, IItemInventory
-{    
-    [Header("Item Properties")][SerializeField] 
+{
+    [Header("Item Properties")] [SerializeField]
     public SO Item; // The Scripatble object item that this script will inherit properties
     public GameObject ItemsSocket;
     [Space(10)]
 
-    [Header("Interactable Reference")][SerializeField]
+    [Header("Interactable Reference")] [SerializeField]
     private XRGrabInteractable baseInteractable; // Reference of the XRGrabInteracyable Component
     [Space(10)]
     [Header("Hand Interactors")]
     public XRBaseInteractor[] baseInteractors; // The initialization of the hands through Inspector,
-                                              // for a reason only works when access modifier is public 
-    
+                                               // for a reason only works when access modifier is public 
+
     private List<GameObject> hands = new List<GameObject>(); // List of gameobjects that will be added
-    
-    [Header("Layer Identifier Usability")][Space(10)][Tooltip("Choose the condition of the object after is attached to its socket")]
+
+    [Header("Layer Identifier Usability")] [Space(10)] [Tooltip("Choose the condition of the object after is attached to its socket")]
     [SerializeField] private InteractionLayerMask mask; // Layer Mask that identifies the object state such as "is Placed"
 
     /// <summary>
@@ -31,6 +31,9 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     private const int LayerInteractable = 10;
     private const int LayerHands = 12;
     [SerializeField] private string AnimationNameHash = "";
+    [HideInInspector] public string RightHandHash = "";
+    [HideInInspector] public string LeftHandHash = "";
+    private string instanceName;
     /// <summary>
     /// 
     /// </summary>
@@ -42,11 +45,17 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     public delegate void MountInInventory(SO item);
     public event MountInInventory MountInventory;
     Inventory inventory;
-    private void OnEnable()
-    {       
+    InteractableManager instance;
+    
+    private void Awake()
+    {
+        instance = this;
+        instanceName = gameObject.name;
+        RightHandHash = "Right" + instanceName;
+        LeftHandHash = "Left" + instanceName;
+
+        inventory = FindObjectOfType<Inventory>();       
         controller = FindObjectOfType<ButtonActionsController>();
-        inventory = FindObjectOfType<Inventory>();
-        inventory.interactables.Add(this);
 
         baseInteractable = GetComponent<XRGrabInteractable>();
         anim = GetComponent<Animator>();
@@ -54,27 +63,34 @@ public class InteractableManager : MonoBehaviour, IItemInventory
 
         if (baseInteractors == null) { return; }
         baseInteractors = FindObjectsOfType<XRBaseInteractor>();
-
-        hands.Add(GameObject.Find("RightHandGrab"));
-        hands.Add(GameObject.Find("LeftHandGrab"));
-
+                       
+    }
+    private void OnEnable()
+    {
+        inventory.interactables.Add(instance);
         baseInteractable.selectEntered.AddListener(OnSelectEnter);
-        baseInteractable.selectExited.AddListener(OnSelectExit);
+        baseInteractable.selectExited.AddListener(OnSelectExit);            
+    }
+    private void Start()
+    {
 
+        hands.Add(GameObject.Find(RightHandHash));
+        hands.Add(GameObject.Find(LeftHandHash));
         DeactivateHands();
 
-        
     }
     private void OnDisable()
     {
-        inventory.interactables.Remove(this);
-        baseInteractable.selectEntered.RemoveListener(OnSelectEnter);
-        baseInteractable.selectExited.RemoveListener(OnSelectExit);
+        inventory.interactables.Remove(instance);
+        /*        baseInteractable.selectEntered.RemoveListener(OnSelectEnter);
+                baseInteractable.selectExited.RemoveListener(OnSelectExit);*/
     }
     // Method that Triggers all the functionality when an interactor grabs this interactable
+
     private void OnSelectEnter(SelectEnterEventArgs EnterEvents)
     {
-        ItemsSocket.SetActive(true);
+        if(ItemsSocket != null)
+            ItemsSocket.SetActive(true);
         HandSelectChoose(true);
         StopEmissionEffectAnimation(true);
         controller.aButton += StoreInInventory;
@@ -82,15 +98,16 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     // Method that Triggers all the functionality when an interactor release this interactable
     private void OnSelectExit(SelectExitEventArgs ExitEvents)
     {
-        ItemsSocket.SetActive(false);
+        if (ItemsSocket != null)
+            ItemsSocket.SetActive(false);
         HandSelectChoose(false);
-        DeactivateHands();
         StopEmissionEffectAnimation(false);
+        DeactivateHands();
         ApplyPhysicsToInteractable();
         controller.aButton -= StoreInInventory;
     }
 
-    // Function that checks which of the two interactors aka hands interact with this gameobject
+    // Function that checks which of the two interactors aka hands interact with this gameobject 
     public void HandSelectChoose(bool handActivation)
     {
         if (baseInteractors != null) 
@@ -105,9 +122,21 @@ public class InteractableManager : MonoBehaviour, IItemInventory
                 hands[1].SetActive(handActivation);
                 print("IsSelectingLeft");
             }
-        }
+        }       
     }
-    
+    public bool AnyInteractorSelecting()
+    {
+        foreach (XRBaseInteractor binteractor in baseInteractors)
+        {
+            if (binteractor.IsSelecting(baseInteractable))
+            {
+                print(binteractor.name);
+                return true;
+            }
+        }
+        return false;
+    }
+
     // A Function that cannot let the player interact with a placed object in the scene
     //through Socket GameObject
     public void OnSocketDetach()
@@ -125,7 +154,12 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     {
         foreach (GameObject hand in hands)
         {
-            hand.SetActive(Deactivate);
+            if (hand != null) 
+            {
+                hand.SetActive(Deactivate);
+            }
+
+            
         }
     }
     /// <summary>
@@ -144,7 +178,7 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     /// </summary>
     public void DestroyParent() 
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public bool CanUsedAsATool()
@@ -171,7 +205,6 @@ public class InteractableManager : MonoBehaviour, IItemInventory
         
         if (CanBeStored() == true)
         {
-            print("TEST");
             DeactivateHands();
             FindObjectOfType<HandUI>().anim.SetBool("HandUIActivated", true);
             anim.Play(AnimationNameHash);
