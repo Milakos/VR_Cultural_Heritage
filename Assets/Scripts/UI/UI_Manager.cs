@@ -4,16 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class UI_Manager : MonoBehaviour
 {
     [SerializeField] private GameObject obj;
-    [SerializeField] private TMP_Text textTeleport;
-    [SerializeField] private Button btn;
-    [SerializeField] private Image image;
-    
+/*    [SerializeField] private TMP_Text textTeleport;*/
+
     private void Awake() 
-    {    
-        textTeleport = GetComponentInChildren<TMP_Text>();    
+    {
+/*        textTeleport = GetComponentInChildren<TMP_Text>();*/
     }
     private void Start() 
     {
@@ -21,17 +20,17 @@ public class UI_Manager : MonoBehaviour
     }
     private void OnEnable() 
     {
-        
-        FindObjectOfType<TeleportSwitch>().changeButtonText += ChangeToggleText;
+/*        
+        FindObjectOfType<TeleportSwitch>().changeButtonText += ChangeToggleText;*/
         FindObjectOfType<ButtonActionsController>().activateCanvasUI += ActivateUICanvas;    
     }
-    public void ChangeToggleText(bool changeText)
+/*    public void ChangeToggleText(bool changeText)
     {
         if(changeText == true)
             textTeleport.text = "Teleport";
         else
             textTeleport.text = "Interact";
-    }
+    }*/
 
     public void ActivateUICanvas(bool i)
     {
@@ -41,13 +40,6 @@ public class UI_Manager : MonoBehaviour
             obj.SetActive(false);
     }
 
-    public void ChangeInventoryButtonImage(Sprite item) 
-    {
-        image.sprite = item;
-    }
-    public void ClearInventoryButtonImage() 
-    {
-        image.sprite = null;
-    }
+
 
 }

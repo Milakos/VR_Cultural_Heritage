@@ -17,7 +17,7 @@ public class NamingHands : MonoBehaviour
     {
         instance = this;
     }
-    private void Start()
+    private void OnEnable()
     {
         interactableManager = GetComponentInParent<InteractableManager>();
 

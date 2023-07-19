@@ -30,9 +30,9 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     private const bool Deactivate = false; // A Const bool that always have to be False for hand deactivation
     private const int LayerInteractable = 10;
     private const int LayerHands = 12;
-    [SerializeField] private string AnimationNameHash = "";
-    [HideInInspector] public string RightHandHash = "";
-    [HideInInspector] public string LeftHandHash = "";
+    [SerializeField] public string AnimationNameHash = "";
+    [HideInInspector] public string RightHandHash;
+    [HideInInspector] public string LeftHandHash;
     private string instanceName;
     /// <summary>
     /// 
@@ -54,6 +54,7 @@ public class InteractableManager : MonoBehaviour, IItemInventory
         RightHandHash = "Right" + instanceName;
         LeftHandHash = "Left" + instanceName;
 
+
         inventory = FindObjectOfType<Inventory>();       
         controller = FindObjectOfType<ButtonActionsController>();
 
@@ -67,21 +68,22 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     }
     private void OnEnable()
     {
+
         inventory.interactables.Add(instance);
         baseInteractable.selectEntered.AddListener(OnSelectEnter);
-        baseInteractable.selectExited.AddListener(OnSelectExit);            
+        baseInteractable.selectExited.AddListener(OnSelectExit);
+        
     }
     private void Start()
     {
-
         hands.Add(GameObject.Find(RightHandHash));
         hands.Add(GameObject.Find(LeftHandHash));
         DeactivateHands();
-
     }
     private void OnDisable()
     {
         inventory.interactables.Remove(instance);
+        controller.aButton -= StoreInInventory;
         /*        baseInteractable.selectEntered.RemoveListener(OnSelectEnter);
                 baseInteractable.selectExited.RemoveListener(OnSelectExit);*/
     }
@@ -157,9 +159,7 @@ public class InteractableManager : MonoBehaviour, IItemInventory
             if (hand != null) 
             {
                 hand.SetActive(Deactivate);
-            }
-
-            
+            }          
         }
     }
     /// <summary>
@@ -212,15 +212,15 @@ public class InteractableManager : MonoBehaviour, IItemInventory
             if (MountInventory != null) 
             {               
                 MountInventory?.Invoke(Item);
+                controller.aButton -= StoreInInventory;
             }
-            
         }
         else
         {           
             FindObjectOfType<HandUI>().anim.SetBool("HandUIActivated", true);
         }
 
-        controller.aButton -= StoreInInventory;
+        
     }
 
     public void RemoveFromInventory()

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private List<SO> items = new List<SO>();
-    UI_Manager uiManager;
+    InventoryUIManager inventoryUI;
     ButtonManager btnManager;
     
     public List<InteractableManager> interactables = new List<InteractableManager>();
@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         btnManager = FindObjectOfType<ButtonManager>();
-        uiManager = FindObjectOfType<UI_Manager>();
+        inventoryUI = FindObjectOfType<InventoryUIManager>();
 
         foreach (InteractableManager manager in interactables)
         {
@@ -28,8 +28,7 @@ public class Inventory : MonoBehaviour
     {
         items.Add(item);
         HasItem = true;
-
-        uiManager.ChangeInventoryButtonImage(item.Icon);
+        inventoryUI.ChangeInventoryButtonImage(item.Icon, item.ItemName, item);
         btnManager.item = item;
     }
     public void RemoveItem(SO item) 
@@ -37,7 +36,7 @@ public class Inventory : MonoBehaviour
         if (items.Count <= 1) 
         {           
             items.Remove(item);
-            uiManager.ClearInventoryButtonImage();
+            inventoryUI.ClearInventoryButtonImage();
             btnManager.ClearSOReference();
         }
         if (items.Count > 0) 
