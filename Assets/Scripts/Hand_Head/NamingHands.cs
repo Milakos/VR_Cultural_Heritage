@@ -16,18 +16,20 @@ public class NamingHands : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        
     }
-    private void OnEnable()
+/*    private void Start()
     {
         interactableManager = GetComponentInParent<InteractableManager>();
 
         if (choose == ChooseHand.Right)
         {
             instance.gameObject.name = interactableManager.RightHandHash;
+
         }
-        else if (choose == ChooseHand.Left) 
+        else if (choose == ChooseHand.Left)
         {
             instance.gameObject.name = interactableManager.LeftHandHash;
         }
-    }
+    }*/
 }
