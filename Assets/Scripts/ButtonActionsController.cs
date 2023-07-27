@@ -68,7 +68,7 @@ public class ButtonActionsController : MonoBehaviour
 
             if (buttonAPressed)
             {
-                print("You Pressed " + inputButtonAction[1].action.name);
+                
 
                 if (aButton != null)
                 {

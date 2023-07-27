@@ -31,7 +31,7 @@ public class UI_Manager : MonoBehaviour
         else
             textTeleport.text = "Interact";
     }*/
-
+    
     public void ActivateUICanvas(bool i)
     {
         if(i == true)

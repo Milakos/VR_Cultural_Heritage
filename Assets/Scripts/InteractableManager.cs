@@ -19,7 +19,7 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     public XRBaseInteractor[] baseInteractors; // The initialization of the hands through Inspector,
                                                // for a reason only works when access modifier is public 
 
-    private List<GameObject> hands = new List<GameObject>(); // List of gameobjects that will be added
+    public List<GameObject> hands = new List<GameObject>(); // List of gameobjects that will be added
 
     [Header("Layer Identifier Usability")] [Space(10)] [Tooltip("Choose the condition of the object after is attached to its socket")]
     [SerializeField] private InteractionLayerMask mask; // Layer Mask that identifies the object state such as "is Placed"
@@ -31,9 +31,7 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     private const int LayerInteractable = 10;
     private const int LayerHands = 12;
     [SerializeField] public string AnimationNameHash = "";
-    [HideInInspector] public string RightHandHash;
-    [HideInInspector] public string LeftHandHash;
-    private string instanceName;
+
     /// <summary>
     /// 
     /// </summary>
@@ -42,7 +40,7 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     
     private ButtonActionsController controller;
 
-    public delegate void MountInInventory(SO item);
+    public delegate void MountInInventory(SO item, int id);
     public event MountInInventory MountInventory;
     Inventory inventory;
     InteractableManager instance;
@@ -50,10 +48,6 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     private void Awake()
     {
         instance = this;
-        instanceName = gameObject.name;
-        RightHandHash = "Right" + instanceName;
-        LeftHandHash = "Left" + instanceName;
-
 
         inventory = FindObjectOfType<Inventory>();       
         controller = FindObjectOfType<ButtonActionsController>();
@@ -64,20 +58,17 @@ public class InteractableManager : MonoBehaviour, IItemInventory
 
         if (baseInteractors == null) { return; }
         baseInteractors = FindObjectsOfType<XRBaseInteractor>();
-                       
+        
     }
+    
     private void OnEnable()
-    {
-
+    {      
         inventory.interactables.Add(instance);
         baseInteractable.selectEntered.AddListener(OnSelectEnter);
-        baseInteractable.selectExited.AddListener(OnSelectExit);
-        
+        baseInteractable.selectExited.AddListener(OnSelectExit);       
     }
     private void Start()
     {
-        hands.Add(GameObject.Find(RightHandHash));
-        hands.Add(GameObject.Find(LeftHandHash));
         DeactivateHands();
     }
     private void OnDisable()
@@ -112,6 +103,8 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     // Function that checks which of the two interactors aka hands interact with this gameobject 
     public void HandSelectChoose(bool handActivation)
     {
+
+
         if (baseInteractors != null) 
         {
             if (baseInteractors[0].IsSelecting(baseInteractable))
@@ -195,7 +188,7 @@ public class InteractableManager : MonoBehaviour, IItemInventory
 
         if (CanUsedAsATool() == true) 
         {
-            //TODO add some functionality for using the tool
+            print("This is a Tool");
         }
     }
 
@@ -211,7 +204,7 @@ public class InteractableManager : MonoBehaviour, IItemInventory
             //TODO add some functionality that puts the data in the inventory list
             if (MountInventory != null) 
             {               
-                MountInventory?.Invoke(Item);
+                MountInventory?.Invoke(Item, Item.ID);
                 controller.aButton -= StoreInInventory;
             }
         }
@@ -225,6 +218,7 @@ public class InteractableManager : MonoBehaviour, IItemInventory
 
     public void RemoveFromInventory()
     {
+        // Logic to implement after remoing from inventory
     }
 
 

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ad5ead04261f4e428ef41e6cb19a59e, type: 3}
-  m_Name: Branch_Item
+  m_Name: AnotherBranch
   m_EditorClassIdentifier: 
-  ID: 1
-  ItemName: Tree Branch
+  ID: 0
+  ItemName: SecondBranch
   type: 0
-  prefabGrabbable: {fileID: 3257793742980861455, guid: 46e34c933793cf84db8af5e7e42b84d4, type: 3}
-  prefabSocket: {fileID: 6624211776032086535, guid: 729b35ca63d9b864b962e1c5193968eb, type: 3}
+  prefabGrabbable: {fileID: 0}
+  prefabSocket: {fileID: 0}
   CanStored: 1
   CanUseAsTool: 0
-  Icon: {fileID: 21300000, guid: f2901efd8bb16bc408ad37f017fbf9bc, type: 3}
-  Description: 'A '
+  Icon: {fileID: 21300000, guid: b889ef0124f73fa4298de5e962dac98b, type: 3}
+  Description: B

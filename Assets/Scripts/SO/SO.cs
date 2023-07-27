@@ -6,11 +6,13 @@ using UnityEngine.UI;
 
 [CreateAssetMenu (fileName = "Item", menuName = "Inventory/Item", order = 1)]
 public class SO : ScriptableObject
-{    
+{
     [Header("Item Identity")]
     [Space(10)]
+    public int ID;
     public string ItemName;
     public Type type;
+    
     public GameObject prefabGrabbable;
     public GameObject prefabSocket;
     
