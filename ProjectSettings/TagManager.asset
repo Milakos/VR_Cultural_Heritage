@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Branch
   - Hand
+  - Tree
+  - Axe
+  - PickAxe
+  - Rocks
   layers:
   - Default
   - TransparentFX

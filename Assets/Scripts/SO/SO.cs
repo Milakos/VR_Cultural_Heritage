@@ -29,5 +29,5 @@ public class SO : ScriptableObject
 
 public enum Type 
 {
-    Branch, Charchoal, Silver
+    Branch, Charchoal, Silver, Tool
 }

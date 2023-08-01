@@ -7,7 +7,8 @@ using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ButtonActionsController : MonoBehaviour
-{  
+{
+    ActionBasedContinuousMoveProvider mover;
     /////////////////// /////// Event Declairation \\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\
 
     // Event with the right Stick for rotation
@@ -40,7 +41,12 @@ public class ButtonActionsController : MonoBehaviour
     void Update()
     {
         ButtonControllersInput();
-        MotionSwitchHandler();   
+        MotionSwitchHandler();
+
+        if (mover.leftHandMoveAction.action.IsInProgress() == true) 
+        {
+            print("Moving");
+        }
     }
 
     public void ButtonControllersInput()
