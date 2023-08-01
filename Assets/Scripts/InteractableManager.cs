@@ -103,8 +103,6 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     // Function that checks which of the two interactors aka hands interact with this gameobject 
     public void HandSelectChoose(bool handActivation)
     {
-
-
         if (baseInteractors != null) 
         {
             if (baseInteractors[0].IsSelecting(baseInteractable))
@@ -218,7 +216,7 @@ public class InteractableManager : MonoBehaviour, IItemInventory
 
     public void RemoveFromInventory()
     {
-        // Logic to implement after remoing from inventory
+        // Logic to implement after removing from inventory
     }
 
 

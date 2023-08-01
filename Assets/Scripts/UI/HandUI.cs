@@ -35,12 +35,12 @@ public class HandUI : MonoBehaviour
     }
     private void OnEnable()
     {
-        controller.UIHandCanvas += ActivateHandUI;      
+        /*controller.UIHandCanvas += ActivateHandUI;   */   
     }
 
     private void OnDisable()
     {
-        controller.UIHandCanvas -= ActivateHandUI;
+        /*controller.UIHandCanvas -= ActivateHandUI;*/
         StopCoroutine(CloseUITime());
     }
  

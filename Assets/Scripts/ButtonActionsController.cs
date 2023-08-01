@@ -38,19 +38,25 @@ public class ButtonActionsController : MonoBehaviour
     public InputActionProperty leftGrip;
     private bool isArea;
     private bool isHittingPlaneCheck;
+    private void Awake()
+    {
+        mover = FindObjectOfType<ActionBasedContinuousMoveProvider>();
+    }
     void Update()
     {
         ButtonControllersInput();
         MotionSwitchHandler();
 
-        if (mover.leftHandMoveAction.action.IsInProgress() == true) 
-        {
-            print("Moving");
-        }
+
     }
 
     public void ButtonControllersInput()
     {
+        bool move = mover.leftHandMoveAction.action.IsInProgress();
+        if (move == true)
+        {
+            print("Moving");
+        }
         foreach (var buttons in inputButtonAction)
         {
                 bool buttonAPressed = inputButtonAction[1].action.IsPressed();                
