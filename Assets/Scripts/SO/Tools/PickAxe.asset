@@ -18,6 +18,6 @@ MonoBehaviour:
   prefabGrabbable: {fileID: 0}
   prefabSocket: {fileID: 0}
   CanStored: 0
-  CanUseAsTool: 0
+  CanUseAsTool: 1
   Icon: {fileID: 0}
   Description: A Pickaxe to mine Stone

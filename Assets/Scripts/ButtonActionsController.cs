@@ -55,7 +55,7 @@ public class ButtonActionsController : MonoBehaviour
         bool move = mover.leftHandMoveAction.action.IsInProgress();
         if (move == true)
         {
-            print("Moving");
+            /*print("Moving");*/
         }
         foreach (var buttons in inputButtonAction)
         {

@@ -27,8 +27,8 @@ public class InventoryUIManager : MonoBehaviour
     public List<int> quantityComponents;
 
     private Dictionary<int, ButtonData> imageDataDictionary = new Dictionary<int, ButtonData>();
-    private int currentIndex = 0;
-
+    /*private int currentIndex = 0;*/
+/*
     private void Start()
     {
         for (int i = 0; i < imageComponents.Count; i++)
@@ -71,7 +71,7 @@ public class InventoryUIManager : MonoBehaviour
             // Shift subsequent images and texts to fill the empty slot
             for (int i = 0; i < imageComponents.Count -1 ; i++)
             {
-                /*imageDataDictionary[i] = imageDataDictionary[i + 1];*/
+                *//*imageDataDictionary[i] = imageDataDictionary[i + 1];*//*
                 imageComponents[i].sprite = imageComponents[i + 1].sprite;
                 textComponents[i].text = textComponents[i + 1].text;
             items[i] = items[i + 1];
@@ -94,5 +94,5 @@ public class InventoryUIManager : MonoBehaviour
         // Decrement the current index if it was beyond the last filled index
         currentIndex = Mathf.Min(currentIndex, lastIndex);
 
-    }
+    }*/
 }

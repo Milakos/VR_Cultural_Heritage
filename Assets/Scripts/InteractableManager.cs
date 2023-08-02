@@ -44,14 +44,20 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     public event MountInInventory MountInventory;
     Inventory inventory;
     InteractableManager instance;
-    
+
+    GarbagePool garbage;
+    //
+    public Queue<GameObject> obj = new Queue<GameObject>();
+    //
     private void Awake()
     {
         instance = this;
-
+        //  
+        obj.Enqueue(instance.gameObject);
+        //
         inventory = FindObjectOfType<Inventory>();       
         controller = FindObjectOfType<ButtonActionsController>();
-
+        garbage = FindObjectOfType<GarbagePool>();
         baseInteractable = GetComponent<XRGrabInteractable>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -62,7 +68,8 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     }
     
     private void OnEnable()
-    {      
+    {
+        rb.isKinematic = true;
         inventory.interactables.Add(instance);
         baseInteractable.selectEntered.AddListener(OnSelectEnter);
         baseInteractable.selectExited.AddListener(OnSelectExit);       
@@ -75,8 +82,8 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     {
         inventory.interactables.Remove(instance);
         controller.aButton -= StoreInInventory;
-        /*        baseInteractable.selectEntered.RemoveListener(OnSelectEnter);
-                baseInteractable.selectExited.RemoveListener(OnSelectExit);*/
+        baseInteractable.selectEntered.RemoveListener(OnSelectEnter);
+        baseInteractable.selectExited.RemoveListener(OnSelectExit);
     }
     // Method that Triggers all the functionality when an interactor grabs this interactable
 
@@ -169,6 +176,20 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     /// </summary>
     public void DestroyParent() 
     {
+        if (CanBeStored()) 
+        {
+            if (!CanUsedAsATool())
+            {
+                garbage.grabbables.Enqueue(gameObject);
+                garbage.grabables.Add(Item, obj);                
+            }
+            else 
+            {
+                garbage.tools.Add(Item, gameObject);
+            }
+            
+        }
+        
         gameObject.SetActive(false);
     }
 
@@ -209,11 +230,8 @@ public class InteractableManager : MonoBehaviour, IItemInventory
         else
         {           
             FindObjectOfType<HandUI>().anim.SetBool("HandUIActivated", true);
-        }
-
-        
+        }       
     }
-
     public void RemoveFromInventory()
     {
         // Logic to implement after removing from inventory

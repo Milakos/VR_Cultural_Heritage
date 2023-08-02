@@ -18,6 +18,7 @@ public class QuestGiver : MonoBehaviour
     {
         FindObjectOfType<TreeHandler>().treeGathered += UpdateQuestProgress;
         FindObjectOfType<RockHandler>().rocksGathered += UpdateQuestProgress;
+        FindObjectOfType<SmelterHandler>().smeltGathered += UpdateQuestProgress;
     }
     private void Start()
     {
@@ -36,9 +37,7 @@ public class QuestGiver : MonoBehaviour
         if (other.CompareTag("Player")) 
         {
             questDisplay.Activate(true);
-
-        }
-        
+        }       
     }
     private void OnTriggerExit(Collider other)
     {
@@ -51,20 +50,36 @@ public class QuestGiver : MonoBehaviour
     {
         quest.isCompleted = completed;
 
-        if (quest == currentQuest[currentQuestIndex] && !completed) 
-        {
-            questDisplay.Quest(quest.questName, quest.description);
-            
-            print("INVOKED");
-        }
         if (quest == currentQuest[currentQuestIndex] && completed)
         {
-            currentQuest.Remove(quests[currentQuestIndex]);
+            currentQuest.Remove(quest);
             nextIndex++;
-            currentQuest.Add(quests[nextIndex]);
-            questDisplay.Quest(quests[nextIndex].questName, quests[nextIndex].description);
+
+            if (HasQuestsRemain())
+            {
+                currentQuest.Add(quests[nextIndex]);
+                questDisplay.Quest(quests[nextIndex].questName, quests[nextIndex].description);
+                print("New Quest");
+            }
+            else 
+            {
+                print("No more Quests");
+            }
             
-            print("INVOKED completed");
-        }  
+        }
+
+    }
+
+    public bool HasQuestsRemain() 
+    {
+
+        if (nextIndex < quests.Count)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;            
+        }
     }
 }

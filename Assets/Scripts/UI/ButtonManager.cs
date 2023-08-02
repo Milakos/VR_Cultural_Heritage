@@ -13,12 +13,12 @@ public class ButtonManager : MonoBehaviour
     public TMP_Text textQuantity;
     
     public SO item;
-    public int Quantity;
+    public int Quantity = 0;
     public bool hasItemInSlot;
 
     public delegate void RemoveItemEvent(SO item);
     public event RemoveItemEvent Remove;
-
+    public event RemoveItemEvent SpawnRemovedObject;
 
     private void Awake()
     {
@@ -37,14 +37,14 @@ public class ButtonManager : MonoBehaviour
         ChangeSOItem(item);
         hasItemInSlot = slot;
     }
-    public void MinusChangeUIElement(Sprite sprite, string text, bool slot, SO item)
+/*    public void MinusChangeUIElement(Sprite sprite, string text, bool slot, SO item)
     {
         ChangeButtonImage(sprite);
         ChangeButtonDescription(text);
         DecreaseQuantity();
         ChangeSOItem(item);
         hasItemInSlot = slot;
-    }
+    }*/
     public void ClearSlotData(Sprite sprite, string text, bool slot,  SO item) 
     {
         ChangeButtonImage(sprite);
@@ -68,7 +68,8 @@ public class ButtonManager : MonoBehaviour
     #region Quantity
     public int IncreaseQuantity(int quantity)
     {
-        Quantity += quantity;
+        
+        Quantity++;
         return Quantity;
     }
     public void DecreaseQuantity() 
@@ -76,28 +77,27 @@ public class ButtonManager : MonoBehaviour
         if (Quantity > 0)
         {
             Quantity--;
+
+            if(SpawnRemovedObject != null && item != null)
+            {
+                SpawnRemovedObject(item);
+            }
         }
         if (Quantity == 0)
         {
             Quantity = 0;
             hasItemInSlot = false;
 
-
-            
-
             if (item != null) 
             {
 
                 if (Remove != null)
                 {
-                    Remove(item);
-                    
-                    
-                    
+                    Remove(item);                   
                 }
             }
-            FindObjectOfType<InventoryUIManager>().OnImageClicked();
-            /*ClearSlotData(null, null, false, null);*/
+            /*FindObjectOfType<InventoryUIManager>().OnImageClicked();*/
+            ClearSlotData(null, null, false, null);
 
             print("No more Items to withdraw");
         }       

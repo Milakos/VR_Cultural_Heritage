@@ -34,8 +34,7 @@ public class Inventory : MonoBehaviour
             if (HasID(ID))
             {
                 int existingID = items[item];
-                int dictionaryItemIndex;
-                
+                int dictionaryItemIndex;                
 
                 if (ID.GetHashCode() == existingID.GetHashCode())
                 {
@@ -57,33 +56,32 @@ public class Inventory : MonoBehaviour
         }
         else
         {           
-            items.Add(item, ID);
-            //
-            /*int dictionaryItemIndex = items.Values.ToList().IndexOf(ID);*/
+            items.Add(item, ID);            
+            int dictionaryItemIndex = items.Values.ToList().IndexOf(ID);
+            btnManager[dictionaryItemIndex].ChangeUIElement(item.Icon, item.Description, false, 1, item);
+            print("Interacted with a new item with ID: " + ID);
+            #region ChatGPT
             //
             ///
-            int dictionaryItemIndex = -1;
+            /*int dictionaryItemIndex = -1;*/
             /// ///
             /// ///            
-            for (int i = 0; i < btnManager.Length; i++)
-            {
-                if (!btnManager[i].hasItemInSlot)
-                {
-                    dictionaryItemIndex = i;
-                    break;
-                }
-            }
-            if (dictionaryItemIndex >= 0)
-            {
-                btnManager[dictionaryItemIndex].ChangeUIElement(item.Icon, item.Description, true, 1, item);
-                
-            }
-            ///
-            ///
-            /*btnManager[dictionaryItemIndex].ChangeUIElement(item.Icon, item.Description, false, 1, item);*/
-                    
+            /*            for (int i = 0; i < btnManager.Length; i++)
+                        {
+                            if (!btnManager[i].hasItemInSlot)
+                            {
+                                dictionaryItemIndex = i;
+                                break;
+                            }
+                        }
+                        if (dictionaryItemIndex >= 0)
+                        {
+                            btnManager[dictionaryItemIndex].ChangeUIElement(item.Icon, item.Description, true, 1, item);
 
-            print("Interacted with a new item with ID: " + ID);
+                        }*/
+            ///
+            ///
+            #endregion ChatGPT
         }
     }
 
