@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7479dcc76520561499d96b145f201a76, type: 3}
-  m_Name: CollectWoodQuest
+  m_Name: LightFire
   m_EditorClassIdentifier: 
-  questName: Wood Branches
-  description: The first thing a good silvermisth must do is to keep lighten up her/his
-    fire for heating up the smelter in high temprature. Go pick an Axe and chop some
-    wood tree branches to keep the fire on.
+  questName: Light Fire
+  description: 'Go to light up the fire in the furnance by putting 5 wood branches
+    in pit. '
   type: 0
   targetAmount: 5
-  isCompleted: 1
+  isCompleted: 0

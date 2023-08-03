@@ -57,6 +57,7 @@ public class TreeHandler : MonoBehaviour
                 {
                     print("Quest Completed");
                     treeGathered(quest, true);
+                    
                 }
             }
             if (objectCounter < branchTree.Length - 1)

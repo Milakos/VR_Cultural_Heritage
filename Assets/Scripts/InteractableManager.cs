@@ -47,13 +47,17 @@ public class InteractableManager : MonoBehaviour, IItemInventory
 
     GarbagePool garbage;
     //
-    public Queue<GameObject> obj = new Queue<GameObject>();
+    public Queue<GameObject> objbranch = new Queue<GameObject>();
+    public Queue<GameObject> objores = new Queue<GameObject>();
     //
     private void Awake()
     {
         instance = this;
-        //  
-        obj.Enqueue(instance.gameObject);
+        //
+        if (Item.type == Type.Branch)
+            objbranch.Enqueue(instance.gameObject);
+        else if(Item.type == Type.Silver)
+            objores.Enqueue(instance.gameObject);        
         //
         inventory = FindObjectOfType<Inventory>();       
         controller = FindObjectOfType<ButtonActionsController>();
@@ -180,21 +184,31 @@ public class InteractableManager : MonoBehaviour, IItemInventory
         {
             if (!CanUsedAsATool())
             {
-                if (!garbage.grabables.ContainsKey(Item)) 
+                if (Item.type == Type.Branch)
                 {
-                    garbage.grabables.Add(Item, obj);
+                    if (!garbage.grabables.ContainsKey(Item))
+                    {
+                        garbage.grabables.Add(Item, objbranch);
+                    }
+                    else
+                        garbage.branches.Enqueue(gameObject);
                 }
-                else
-                    garbage.grabbables.Enqueue(gameObject);
-                               
+                else if (Item.type == Type.Silver) 
+                {
+                    if (!garbage.grabables.ContainsKey(Item))
+                    {
+                        garbage.grabables.Add(Item, objores);
+                    }
+                    else
+                        garbage.Ores.Enqueue(gameObject);
+                }              
             }
             else 
             {
                 garbage.tools.Add(Item, gameObject);
             }
             
-        }
-        
+        }      
         gameObject.SetActive(false);
     }
 
