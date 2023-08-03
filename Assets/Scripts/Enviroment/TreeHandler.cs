@@ -5,8 +5,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
 public class TreeHandler : MonoBehaviour
-{    
-    public  int overallHits = 15;
+{
+    public int overallHits = 15;
     public int hit = 0;
     public int totalAmountLeft;
 
@@ -22,7 +22,7 @@ public class TreeHandler : MonoBehaviour
 
     private void Awake()
     {
-        totalAmountLeft = quest.targetAmount;        
+        totalAmountLeft = quest.targetAmount;
         GetComponent<BoxCollider>().isTrigger = true;
     }
     private void Start()
@@ -34,12 +34,12 @@ public class TreeHandler : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Axe")) 
+        if (other.CompareTag("Axe"))
         {
-            if (hit < overallHits) 
+            if (hit < overallHits)
             {
                 hit++;
-                if (hit >= overallHits) 
+                if (hit >= overallHits)
                 {
                     particles.Play();
 
@@ -47,21 +47,19 @@ public class TreeHandler : MonoBehaviour
 
                     print("You take Tree wood branches");
                     hit = 0;
-                    
+
                     totalAmountLeft--;
                 }
             }
             if (totalAmountLeft == 0)
             {
-
                 if (treeGathered != null)
                 {
                     print("Quest Completed");
-
                     treeGathered(quest, true);
                 }
             }
-            if (objectCounter < branchTree.Length -1)
+            if (objectCounter < branchTree.Length - 1)
                 objectCounter++;
             print("Axe INteracted with Tree");
         }

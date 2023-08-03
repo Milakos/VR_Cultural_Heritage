@@ -10,6 +10,7 @@ TagManager:
   - Axe
   - PickAxe
   - Rocks
+  - Hammer
   layers:
   - Default
   - TransparentFX

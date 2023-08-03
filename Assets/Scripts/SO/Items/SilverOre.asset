@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ad5ead04261f4e428ef41e6cb19a59e, type: 3}
-  m_Name: TwoBranch
+  m_Name: SilverOre
   m_EditorClassIdentifier: 
   ID: 2
-  ItemName: TwoSideBranch
-  type: 0
+  ItemName: SilverOre
+  type: 2
   prefabGrabbable: {fileID: 0}
   prefabSocket: {fileID: 0}
   CanStored: 1
   CanUseAsTool: 0
-  Icon: {fileID: 21300000, guid: 3086d66a563317b40a20a20da2c64ac0, type: 3}
-  Description: C
+  Icon: {fileID: 21300000, guid: 5d72b315ca037874380c6d5be5ade948, type: 3}
+  Description: An ore to Smelt

@@ -180,8 +180,13 @@ public class InteractableManager : MonoBehaviour, IItemInventory
         {
             if (!CanUsedAsATool())
             {
-                garbage.grabbables.Enqueue(gameObject);
-                garbage.grabables.Add(Item, obj);                
+                if (!garbage.grabables.ContainsKey(Item)) 
+                {
+                    garbage.grabables.Add(Item, obj);
+                }
+                else
+                    garbage.grabbables.Enqueue(gameObject);
+                               
             }
             else 
             {
