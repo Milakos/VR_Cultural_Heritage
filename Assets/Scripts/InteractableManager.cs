@@ -81,6 +81,7 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     private void Start()
     {
         DeactivateHands();
+        CollidesWithForge(false);
     }
     private void OnDisable()
     {
@@ -102,8 +103,12 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     // Method that Triggers all the functionality when an interactor release this interactable
     private void OnSelectExit(SelectExitEventArgs ExitEvents)
     {
-        if (ItemsSocket != null)
-            ItemsSocket.SetActive(false);
+        if (CollidesWithForge(false)) 
+        {
+            if (ItemsSocket != null)
+                ItemsSocket.SetActive(false);
+        }
+
         HandSelectChoose(false);
         StopEmissionEffectAnimation(false);
         DeactivateHands();
@@ -146,6 +151,7 @@ public class InteractableManager : MonoBehaviour, IItemInventory
     public void OnSocketDetach()
     {
         baseInteractable.interactionLayers = mask;
+        print("Detach");
     }
     // A Function for triggering the emission animation componenet through grabbing from player
     public void StopEmissionEffectAnimation(bool grabbingBool)
@@ -249,12 +255,31 @@ public class InteractableManager : MonoBehaviour, IItemInventory
         else
         {           
             FindObjectOfType<HandUI>().anim.SetBool("HandUIActivated", true);
-        }       
+        }
+        if (ItemsSocket != null)
+            ItemsSocket.SetActive(false);
     }
     public void RemoveFromInventory()
     {
         // Logic to implement after removing from inventory
     }
 
+    public void DestoryOnSocket() 
+    {
+        Destroy(gameObject);
+        Destroy(ItemsSocket);
+    }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Forge"))
+        {
+            CollidesWithForge(true);
+        }
+    }
+
+    public bool CollidesWithForge(bool collides) 
+    {
+        return collides;
+    }
 }

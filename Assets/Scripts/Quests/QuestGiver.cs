@@ -24,6 +24,7 @@ public class QuestGiver : MonoBehaviour
         FindObjectOfType<TreeHandler>().treeGathered += UpdateQuestProgress;
         FindObjectOfType<RockHandler>().rocksGathered += UpdateQuestProgress;
         FindObjectOfType<SmelterHandler>().smeltGathered += UpdateQuestProgress;
+        FindObjectOfType<LightFireHandler>().woodPlaced += UpdateQuestProgress;
 
         anim = GetComponentInChildren<Animator>();
     }

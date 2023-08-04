@@ -10,7 +10,7 @@ public class QuestSO : ScriptableObject
     public string description;
     public QuestType type;
     public int targetAmount;
-  
+    
     public bool isCompleted;
     public enum QuestType { CollectWoodBranches, CollectSilverOre, SmeltOre }
 }

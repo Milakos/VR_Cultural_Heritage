@@ -33,7 +33,7 @@ public class CulturalHeritageEditor : EditorWindow
 
         var btn = GUILayout.Button("Spawn");
 
-        if (btn) 
+/*        if (btn) 
         {
             if (prefab != null)
                 Instantiate(prefab, GameObject.Find("-----[GRAB INTERACTABLES]------").transform);
@@ -51,6 +51,6 @@ public class CulturalHeritageEditor : EditorWindow
 
 
             Close();
-        }
+        }*/
     }
 }
