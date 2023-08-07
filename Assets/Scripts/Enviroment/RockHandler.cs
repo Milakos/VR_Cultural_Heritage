@@ -12,9 +12,11 @@ public class RockHandler : MonoBehaviour
 
     public int objectCounter = 0;
     
-    public delegate void Achivement(QuestSO quest, bool completed);
-    public event Achivement rocksGathered;
+/*    public delegate void Achivement(QuestSO quest, bool completed);
+    public event Achivement rocksGathered;*/
 
+    public Quest.Achivement rocksAchieved;
+    public GameObject Reward;
     public QuestSO quest;
     public QuestGiver giver;
     public GameObject[] silverOres;
@@ -27,6 +29,9 @@ public class RockHandler : MonoBehaviour
     }
     private void Start()
     {
+        if(Reward != null)
+            Reward.SetActive(false);
+
         foreach (GameObject ob in silverOres)
         {
             SpawnObject(ob, false);
@@ -53,9 +58,9 @@ public class RockHandler : MonoBehaviour
             }
             if (totalAmountLeft == 0)
             {
-                if (rocksGathered != null)
+                if (rocksAchieved != null)
                 {
-                    rocksGathered(quest, true);
+                    rocksAchieved(quest, true, Reward);
                 }
             }
             if (objectCounter < silverOres.Length - 1)

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7479dcc76520561499d96b145f201a76, type: 3}
   m_Name: PlaceSilverOreTothePot
   m_EditorClassIdentifier: 
-  questName: 
-  description: Place 1 silver Ore to the pot at the furnance to smelt the ore in
-    a liquid form
+  questName: Silver Ore to The Pot
+  description: Place one (1) silver Ore to the pot at the furnance to smelt the ore
+    in a liquid form
   type: 1
   targetAmount: 1
   isCompleted: 0

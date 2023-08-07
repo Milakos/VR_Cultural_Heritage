@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad5ead04261f4e428ef41e6cb19a59e, type: 3}
   m_Name: Smelter
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 8
   ItemName: 
   type: 0
   prefabGrabbable: {fileID: 0}

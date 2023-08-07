@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SmelterHandler : MonoBehaviour
-{
-    public delegate void Achivement(QuestSO quest, bool completed);
-    public event Achivement smeltGathered;
-
+{  
+    public GameObject Reward;
     public QuestSO quest;
-    private void OnTriggerEnter(Collider other)
+    public GameObject timer;
+    public GameObject[] SilverSockets;
+    private void Start()
     {
-        if (other.gameObject.CompareTag("Player")) 
+        timer.SetActive(false);
+        if(Reward != null)
+            Reward.SetActive(false);
+        foreach (GameObject silver in SilverSockets) 
         {
-            print("SMELT");
-            if (smeltGathered != null)
-            {
-                smeltGathered(quest, true);
-            }
+            silver.gameObject.SetActive(false);
         }
+    }
+    public void SilverPlacedAtTheCauldron() 
+    {
+        if(timer != null)
+            timer.SetActive(true);
     }
 }

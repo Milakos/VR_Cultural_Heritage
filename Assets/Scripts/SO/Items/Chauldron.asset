@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ad5ead04261f4e428ef41e6cb19a59e, type: 3}
-  m_Name: LineSmelter
+  m_Name: Chauldron
   m_EditorClassIdentifier: 
-  ID: 7
-  ItemName: 
-  type: 0
+  ID: 9
+  ItemName: Chauldron
+  type: 3
   prefabGrabbable: {fileID: 0}
   prefabSocket: {fileID: 0}
   CanStored: 0
   CanUseAsTool: 1
-  Icon: {fileID: 0}
-  Description: 
+  Icon: {fileID: 21300000, guid: e3b9d1e877110e64ebdc843b30402072, type: 3}
+  Description: Pot to smelt the ore

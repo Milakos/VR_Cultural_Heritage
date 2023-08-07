@@ -16,10 +16,10 @@ public class LightFireHandler : MonoBehaviour
     [SerializeField] XRSocketInteractor[] sockets;
     private List<XRSocketInteractor> XRSockets = new List<XRSocketInteractor>();
 
-    public delegate void Achivement(QuestSO quest, bool completed);
-    public event Achivement woodPlaced;
+/*    public delegate void Achivement(QuestSO quest, bool completed);
+    public event Achivement woodPlaced;*/
 
-    Quest.Achivement woodAchieved;
+    public Quest.Achivement woodAchieved;
 
     private void Awake()
     {
@@ -30,17 +30,23 @@ public class LightFireHandler : MonoBehaviour
             XRSockets.Add(socket);
         }
     }
+    private void Start()
+    {
+        if(Reward != null)
+            Reward.SetActive(false);
+    }
     public void RemoveItemFromList(XRSocketInteractor socketItem) 
     {
         leftwoods--;
         XRSockets.Remove(socketItem);
         if (XRSockets.Count == 0 && leftwoods == 0) 
         {
-            if (woodPlaced != null) 
-            {
-                woodPlaced(quest, true);
-                /*woodAchieved(quest, true, Reward);*/
-            }
+/*            if (woodPlaced != null) 
+            {*/
+                /*woodPlaced(quest, true);*/
+                if(woodAchieved != null)
+                    woodAchieved(quest, true, Reward);
+            /*}*/
             
             print("No more items");
         }

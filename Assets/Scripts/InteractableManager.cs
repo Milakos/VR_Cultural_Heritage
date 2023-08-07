@@ -207,7 +207,7 @@ public class InteractableManager : MonoBehaviour, IItemInventory
                     }
                     else
                         garbage.Ores.Enqueue(gameObject);
-                }              
+                }
             }
             else 
             {

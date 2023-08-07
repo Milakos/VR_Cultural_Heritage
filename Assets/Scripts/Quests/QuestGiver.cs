@@ -10,7 +10,7 @@ public class QuestGiver : MonoBehaviour
 
     public List<QuestSO> currentQuest = new List<QuestSO>();
 
-    public List<GameObject> reward = new List<GameObject>();
+    public Timer timer;
 
     private int currentQuestIndex = 0;
     private int nextIndex = 0;
@@ -18,13 +18,21 @@ public class QuestGiver : MonoBehaviour
     public GameObject player;
 
     public QuestUI questDisplay;
-
+    private void Awake()
+    {
+        
+    }
     private void OnEnable()
     {
-        FindObjectOfType<TreeHandler>().treeGathered += UpdateQuestProgress;
-        FindObjectOfType<RockHandler>().rocksGathered += UpdateQuestProgress;
-        FindObjectOfType<SmelterHandler>().smeltGathered += UpdateQuestProgress;
-        FindObjectOfType<LightFireHandler>().woodPlaced += UpdateQuestProgress;
+        /*        FindObjectOfType<TreeHandler>().treeGathered += UpdateQuestProgress;
+                FindObjectOfType<RockHandler>().rocksGathered += UpdateQuestProgress;
+                FindObjectOfType<SmelterHandler>().smeltGathered += UpdateQuestProgress;
+                FindObjectOfType<LightFireHandler>().woodPlaced += UpdateQuestProgress;*/
+        FindObjectOfType<TreeHandler>().treeAchieved += UpdateQuestProgress;
+        FindObjectOfType<RockHandler>().rocksAchieved += UpdateQuestProgress;
+        timer.smeltAchieved += UpdateQuestProgress;
+        FindObjectOfType<LightFireHandler>().woodAchieved += UpdateQuestProgress;
+        FindObjectOfType<PlaceCauldronHandler>().PotPlacedAchievement += UpdateQuestProgress;
 
         anim = GetComponentInChildren<Animator>();
     }
@@ -35,10 +43,10 @@ public class QuestGiver : MonoBehaviour
         {
             quest.isCompleted = false;
         }
-        foreach (GameObject rewards in reward) 
+/*        foreach (GameObject rewards in reward) 
         {
             rewards.SetActive(false);
-        }
+        }*/
         currentQuest.Add(quests[currentQuestIndex]);
         questDisplay.Quest(currentQuest[currentQuestIndex].questName, currentQuest[currentQuestIndex].description);
   
@@ -60,13 +68,15 @@ public class QuestGiver : MonoBehaviour
             anim.SetBool("talk", false);
         }
     }
-    public void UpdateQuestProgress(QuestSO quest, bool completed)
+    public void UpdateQuestProgress(QuestSO quest, bool completed, GameObject reward)
     {
         quest.isCompleted = completed;
 
         if (quest == currentQuest[currentQuestIndex] && completed)
         {
-            reward[nextIndex].SetActive(true);
+            /*reward[nextIndex].SetActive(true);*/
+            if(reward != null)
+                reward.SetActive(true);
 
             currentQuest.Remove(quest);
             nextIndex++;

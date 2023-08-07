@@ -12,8 +12,10 @@ public class TreeHandler : MonoBehaviour
 
     public int objectCounter = 0;
 
-    public delegate void Achivement(QuestSO quest, bool completed);
-    public event Achivement treeGathered;
+    /*    public delegate void Achivement(QuestSO quest, bool completed);
+        public event Achivement treeGathered;*/
+    public Quest.Achivement treeAchieved;
+    public GameObject Reward = null;
 
     public QuestSO quest;
     public QuestGiver giver;
@@ -27,6 +29,9 @@ public class TreeHandler : MonoBehaviour
     }
     private void Start()
     {
+        if(Reward != null)
+            Reward.SetActive(false);
+
         foreach (GameObject ob in branchTree)
         {
             SpawnObject(ob, false);
@@ -53,10 +58,10 @@ public class TreeHandler : MonoBehaviour
             }
             if (totalAmountLeft == 0)
             {
-                if (treeGathered != null)
+                if (treeAchieved != null)
                 {
                     print("Quest Completed");
-                    treeGathered(quest, true);
+                    treeAchieved(quest, true, null);
                     
                 }
             }
