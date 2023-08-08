@@ -4,30 +4,25 @@ using UnityEngine;
 
 public class QuestGiver : MonoBehaviour
 {
-    Animator anim;
-
-    public List<QuestSO> quests = new List<QuestSO>();
-
+    private Animator anim;
+    // Index Counter of the current quest
+    private int currentQuestIndex = 0;
+    // Index that counts the next quest
+    private int nextIndex = 0;
+    // List of all quest in the game
+    [SerializeField] private List<QuestSO> quests = new List<QuestSO>();
+    // List that will only contain one element that will be added and removed
+    //showing the current Quest
     public List<QuestSO> currentQuest = new List<QuestSO>();
 
-    public Timer timer;
+    [SerializeField] private Timer timer;
 
-    private int currentQuestIndex = 0;
-    private int nextIndex = 0;
-
-    public GameObject player;
+ /*   public GameObject player;*/
 
     public QuestUI questDisplay;
-    private void Awake()
-    {
-        
-    }
+
     private void OnEnable()
     {
-        /*        FindObjectOfType<TreeHandler>().treeGathered += UpdateQuestProgress;
-                FindObjectOfType<RockHandler>().rocksGathered += UpdateQuestProgress;
-                FindObjectOfType<SmelterHandler>().smeltGathered += UpdateQuestProgress;
-                FindObjectOfType<LightFireHandler>().woodPlaced += UpdateQuestProgress;*/
         FindObjectOfType<TreeHandler>().treeAchieved += UpdateQuestProgress;
         FindObjectOfType<RockHandler>().rocksAchieved += UpdateQuestProgress;
         timer.smeltAchieved += UpdateQuestProgress;
@@ -38,20 +33,22 @@ public class QuestGiver : MonoBehaviour
     }
     private void Start()
     {
-        player = FindObjectOfType<GameObject>();
+        /*player = FindObjectOfType<GameObject>();*/
         foreach (QuestSO quest in quests)
         {
             quest.isCompleted = false;
         }
-/*        foreach (GameObject rewards in reward) 
-        {
-            rewards.SetActive(false);
-        }*/
         currentQuest.Add(quests[currentQuestIndex]);
         questDisplay.Quest(currentQuest[currentQuestIndex].questName, currentQuest[currentQuestIndex].description);
   
     }
 
+    /// <summary>
+    /// A region that is responsible of displaying the quest canvas when the player 
+    /// comes in - out in the specific area
+    /// </summary>
+    /// <param name="other"></param>
+    #region TriggerCollider
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) 
@@ -68,6 +65,15 @@ public class QuestGiver : MonoBehaviour
             anim.SetBool("talk", false);
         }
     }
+    #endregion TriggerCollider
+
+
+    /// <summary>
+    /// A method that is responsible for the transition of quest and display UI elements depend on each quest
+    /// </summary>
+    /// <param name="quest"></param>
+    /// <param name="completed"></param>
+    /// <param name="reward"></param>
     public void UpdateQuestProgress(QuestSO quest, bool completed, GameObject reward)
     {
         quest.isCompleted = completed;
@@ -90,15 +96,15 @@ public class QuestGiver : MonoBehaviour
             else 
             {
                 print("No more Quests");
-            }
-            
+            }           
         }
-
     }
-
+    /// <summary>
+    /// Function that returns true or false depend if there is another quest to complete
+    /// </summary>
+    /// <returns></returns>
     public bool HasQuestsRemain() 
     {
-
         if (nextIndex < quests.Count)
         {
             return true;

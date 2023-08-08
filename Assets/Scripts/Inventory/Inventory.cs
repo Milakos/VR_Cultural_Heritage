@@ -8,7 +8,11 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public ButtonManager[] btnManager;
+    /// <summary>
+    /// An inventory class that is responsible for adding and removing items that uses want to store
+    /// </summary>
+    
+    [SerializeField] private ButtonManager[] btnManager;
 
     private Dictionary<SO, int> items = new Dictionary<SO, int>();
 
@@ -26,7 +30,13 @@ public class Inventory : MonoBehaviour
                 button.Remove += RemoveItem;                      
         }
     }
-
+    /// <summary>
+    /// A Method that called when the user chooses to store the item in the inventory.
+    /// When the inventory slot is empty it adds the item based on its ID in the dictionary and increases the quantity to 1
+    /// When an item is Added and already axists, increases only the quantity.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="ID"></param>
     public void AddItem(SO item, int ID) 
     {
         if (HasItem(item))
@@ -84,13 +94,17 @@ public class Inventory : MonoBehaviour
             #endregion ChatGPT
         }
     }
-
+    
+    /// <summary>
+    /// When this method is called removes the item given in the method parameter from the dictionary
+    /// </summary>
+    /// <param name="item"></param>
     public void RemoveItem(SO item)
     {
         if (HasItem(item))
         {
             items.Remove(item);
-            #region ChatGPT
+#region ChatGPT
             /* 
                         /* int removedItemIndex = -1;*//*
 
@@ -141,7 +155,7 @@ public class Inventory : MonoBehaviour
             }
 
             items.Remove(item);*/
-            #endregion ChatGPT
+            #endregion ChatGPT            
 
             Debug.Log("Succesfully Removed "  + item.name + "(s) from the inventory.");
         }
@@ -156,6 +170,12 @@ public class Inventory : MonoBehaviour
     {
         return items.ContainsKey(item);
     }
+    /// <summary>
+    /// A pure Function that that checks if the given value ID is the same as the parameter 
+    /// and returns true or false for useage such as checking the inventory to update the image or quantity
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public bool HasID(int value) 
     {
         foreach (int existingID in items.Values) 

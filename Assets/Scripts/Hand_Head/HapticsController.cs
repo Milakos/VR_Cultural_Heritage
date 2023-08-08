@@ -6,8 +6,11 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class HapticsController : MonoBehaviour
 {
-    
-    [SerializeField] ActionBasedController leftController, rightController;
+    /// <summary>
+    /// A Class that is responsible for adding extra functionality when the hand interactors hovers above 
+    /// specific object interactables
+    /// </summary>
+    [SerializeField] private ActionBasedController leftController, rightController;
     
     [Header("Haptics Properties")]
     [SerializeField] private float hapticsAmplitude, hapticsDuration;

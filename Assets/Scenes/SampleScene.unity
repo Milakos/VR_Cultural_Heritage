@@ -1660,11 +1660,11 @@ GameObject:
   - component: {fileID: 184522845}
   - component: {fileID: 184522846}
   m_Layer: 0
-  m_Name: Spot Light (2)
+  m_Name: Forge LIght
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &184522844
 Transform:
@@ -1674,7 +1674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184522843}
   m_LocalRotation: {x: 0.6884611, y: 0.16131125, z: -0.16131125, w: 0.6884611}
-  m_LocalPosition: {x: -15.039449, y: 2.933, z: -2.2808444}
+  m_LocalPosition: {x: -14.662, y: 3.122, z: -3.888}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1693,13 +1693,13 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.3972944, g: 0.9056604, b: 0.89569247, a: 1}
-  m_Intensity: 0.65
+  m_Intensity: 1.76
   m_Range: 9.67
-  m_SpotAngle: 123.313225
+  m_SpotAngle: 179
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1732,7 +1732,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -8329,11 +8329,11 @@ GameObject:
   - component: {fileID: 389711340}
   - component: {fileID: 389711339}
   m_Layer: 0
-  m_Name: Area Light
+  m_Name: Right Wall Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &389711338
 Transform:
@@ -8388,7 +8388,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -8430,7 +8430,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
+  m_ShadowRadius: 2
   m_ShadowAngle: 0
 --- !u!1 &390001277
 GameObject:
@@ -9435,6 +9435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 508432152}
   - component: {fileID: 508432153}
+  - component: {fileID: 508432154}
   m_Layer: 0
   m_Name: PlaceSilver
   m_TagString: Untagged
@@ -9472,13 +9473,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4536609ea199a54d8f87fa80ce93462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Reward: {fileID: 12604890}
   quest: {fileID: 11400000, guid: 6a534c62dbd83bb4ea17dfdd15611a9e, type: 2}
-  timer: {fileID: 1519235586}
-  SilverSockets:
+  Reward: {fileID: 12604890}
+  particles: {fileID: 0}
+  lightObject: {fileID: 0}
+  objectsToSpawn:
   - {fileID: 6112376981105389597}
   - {fileID: 1288537181}
   - {fileID: 1367959352}
+  overallHits: 15
+  timer: {fileID: 1519235586}
+--- !u!65 &508432154
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508432151}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &532872805
 GameObject:
   m_ObjectHideFlags: 0
@@ -10624,9 +10641,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 654482537}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00069}
-  m_LocalScale: {x: 0.00498148, y: 0.004706994, z: -0.000016943}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0006900007}
+  m_LocalScale: {x: 0.00498148, y: 0.004706994, z: -0.000016943002}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1705726332}
@@ -11149,11 +11166,11 @@ GameObject:
   - component: {fileID: 716845772}
   - component: {fileID: 716845773}
   m_Layer: 0
-  m_Name: Spot Light (1)
+  m_Name: Left Front Blue LIght
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &716845771
 Transform:
@@ -11163,7 +11180,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716845770}
   m_LocalRotation: {x: 0.6884611, y: 0.16131125, z: -0.16131125, w: 0.6884611}
-  m_LocalPosition: {x: -5.9957175, y: 2.718, z: -6.471472}
+  m_LocalPosition: {x: -5.782, y: 2.718, z: -6.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11182,13 +11199,13 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.3972944, g: 0.9056604, b: 0.89569247, a: 1}
-  m_Intensity: 0.65
+  m_Intensity: 1.76
   m_Range: 9.67
-  m_SpotAngle: 134.63637
+  m_SpotAngle: 179
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -11221,7 +11238,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -11629,11 +11646,11 @@ GameObject:
   - component: {fileID: 749969090}
   - component: {fileID: 749969089}
   m_Layer: 0
-  m_Name: Area Light (1)
+  m_Name: Smith Props LIght
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &749969088
 Transform:
@@ -11688,7 +11705,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -11730,7 +11747,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
+  m_ShadowRadius: 2
   m_ShadowAngle: 0
 --- !u!1 &757955395
 GameObject:
@@ -11778,18 +11795,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e84fd9009615743a0f17fc1c85d373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overallHits: 1
-  hit: 0
-  totalAmountLeft: 0
-  objectCounter: 0
-  Reward: {fileID: 0}
   quest: {fileID: 11400000, guid: a795953114f41634cac8132ff2cb5bde, type: 2}
-  giver: {fileID: 959218630}
-  silverOres:
+  Reward: {fileID: 0}
+  particles: {fileID: 1170380323193452140}
+  lightObject: {fileID: 0}
+  objectsToSpawn:
   - {fileID: 1418149973411377727}
   - {fileID: 1308422840}
   - {fileID: 681112595}
-  particles: {fileID: 1170380323193452140}
+  overallHits: 1
 --- !u!65 &757955398
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12061,7 +12075,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792538192}
   m_LocalRotation: {x: -0, y: 0.9737256, z: -0, w: -0.22772442}
-  m_LocalPosition: {x: -10.645336, y: 0, z: -9.404251}
+  m_LocalPosition: {x: -12.15, y: 0, z: -8.584}
   m_LocalScale: {x: 7.988759, y: 1, z: 1.666}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12258,7 +12272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825358199}
   m_LocalRotation: {x: -0, y: 0.84960955, z: -0, w: 0.5274123}
-  m_LocalPosition: {x: -5.9458, y: 0.0033037663, z: -7.719534}
+  m_LocalPosition: {x: -5.7981863, y: 0.0033037663, z: -7.263708}
   m_LocalScale: {x: 5.311329, y: 0.99116, z: 1.12772}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12992,11 +13006,11 @@ GameObject:
   - component: {fileID: 902941807}
   - component: {fileID: 902941806}
   m_Layer: 0
-  m_Name: Spot Light (5)
+  m_Name: Central Latern Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &902941805
 Transform:
@@ -13051,7 +13065,7 @@ Light:
   m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -13084,7 +13098,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -13093,7 +13107,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
+  m_ShadowRadius: 2
   m_ShadowAngle: 0
 --- !u!4 &911294961
 Transform:
@@ -13674,7 +13688,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6e7bc2f1afcab5d47a70869200bc769e, type: 2}
   currentQuest: []
   timer: {fileID: 1519235588}
-  player: {fileID: 837959949}
   questDisplay: {fileID: 292729816}
 --- !u!4 &959218631
 Transform:
@@ -14600,20 +14613,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695f9ff3591b3054698047cb5bf1f553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overallHits: 1
-  hit: 0
-  totalAmountLeft: 0
-  objectCounter: 0
-  Reward: {fileID: 0}
   quest: {fileID: 11400000, guid: 561e731ce2f04eb459972992a3b129ff, type: 2}
-  giver: {fileID: 959218630}
-  branchTree:
-  - {fileID: 1795495405959372929}
+  Reward: {fileID: 0}
+  particles: {fileID: 349036130}
+  lightObject: {fileID: 0}
+  objectsToSpawn:
   - {fileID: 3896094600226548778}
   - {fileID: 3896094601795585485}
   - {fileID: 3896094601069713821}
   - {fileID: 3896094600655156283}
-  particles: {fileID: 349036130}
+  - {fileID: 1795495405959372929}
+  overallHits: 1
 --- !u!65 &1092782726
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25466,11 +25476,11 @@ GameObject:
   - component: {fileID: 1270932084}
   - component: {fileID: 1270932083}
   m_Layer: 0
-  m_Name: Area Light (2)
+  m_Name: Entrance Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1270932082
 Transform:
@@ -25480,7 +25490,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270932081}
   m_LocalRotation: {x: 0.7118868, y: 0.37272632, z: -0.34358582, w: 0.48604643}
-  m_LocalPosition: {x: -10.535677, y: 2.866, z: -4.6490226}
+  m_LocalPosition: {x: -10.283, y: 2.866, z: -4.419}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25525,7 +25535,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -25567,7 +25577,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
+  m_ShadowRadius: 2
   m_ShadowAngle: 0
 --- !u!1 &1275886673
 GameObject:
@@ -25785,7 +25795,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287042062}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -7.327, y: 0.343, z: -9.891}
+  m_LocalPosition: {x: -7.1793866, y: 0.343, z: -9.435174}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27546,6 +27556,7 @@ Transform:
   - {fileID: 1270932082}
   - {fileID: 1971450479}
   - {fileID: 902941805}
+  - {fileID: 1983770682}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -29535,8 +29546,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1ddebd88658fe47ac9fb672724bbe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 25
-  timerIsRunning: 0
   timeText: {fileID: 1512244417}
 --- !u!1 &1544256335
 GameObject:
@@ -30162,7 +30171,7 @@ GameObject:
   - component: {fileID: 1705726334}
   - component: {fileID: 1705726333}
   m_Layer: 0
-  m_Name: Spot Light
+  m_Name: Boiling Smelted Ore Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30175,8 +30184,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705726331}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.023, z: -189}
+  m_LocalRotation: {x: 0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.022999989, z: -189}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30254,7 +30263,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -30751,7 +30760,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1769227219}
   m_LocalRotation: {x: -0, y: 0.34837735, z: -0, w: 0.9373544}
-  m_LocalPosition: {x: 0.3170002, y: -0.29500008, z: -0.26100063}
+  m_LocalPosition: {x: 0.5607112, y: -0.29500008, z: 0.15151829}
   m_LocalScale: {x: 0.23883198, y: 0.046540003, z: 0.69373596}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31374,11 +31383,11 @@ GameObject:
   - component: {fileID: 1797424131}
   - component: {fileID: 1797424132}
   m_Layer: 0
-  m_Name: Spot Light (3)
+  m_Name: Right Back Blue LIght - Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1797424130
 Transform:
@@ -31388,7 +31397,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797424129}
   m_LocalRotation: {x: 0.6884611, y: 0.16131125, z: -0.16131125, w: 0.6884611}
-  m_LocalPosition: {x: -17.753359, y: 3.38, z: -9.989622}
+  m_LocalPosition: {x: -18.186, y: 2.651, z: -9.835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31407,13 +31416,13 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.3972944, g: 0.9056604, b: 0.89569247, a: 1}
-  m_Intensity: 1.46
+  m_Intensity: 1.76
   m_Range: 9.67
-  m_SpotAngle: 119.53884
+  m_SpotAngle: 179
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -31446,10 +31455,10 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1.35
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -31583,11 +31592,11 @@ GameObject:
   - component: {fileID: 1834096613}
   - component: {fileID: 1834096612}
   m_Layer: 0
-  m_Name: Spot Light (4)
+  m_Name: Left back Blue LIght
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1834096611
 Transform:
@@ -31597,7 +31606,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1834096610}
   m_LocalRotation: {x: 0.6884611, y: 0.16131125, z: -0.16131125, w: 0.6884611}
-  m_LocalPosition: {x: -8.983613, y: 2.59, z: -14.093538}
+  m_LocalPosition: {x: -9.708, y: 2.59, z: -13.773}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31636,13 +31645,13 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.3972944, g: 0.9056604, b: 0.89569247, a: 1}
-  m_Intensity: 0.65
+  m_Intensity: 1.76
   m_Range: 9.67
   m_SpotAngle: 179
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -31675,7 +31684,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -32494,6 +32503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1940790046}
   - component: {fileID: 1940790047}
+  - component: {fileID: 1940790048}
   m_Layer: 0
   m_Name: PlaceWoodToSockets
   m_TagString: Untagged
@@ -32533,18 +32543,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4439cd2d05aa9b4fa7856b0da3ddbb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: {fileID: 1144630703}
-  lightToggle: {fileID: 1983770683}
   quest: {fileID: 11400000, guid: af213d913cf902c48a32a8aba9f0776a, type: 2}
-  questGiver: {fileID: 959218630}
   Reward: {fileID: 1287042062}
-  leftwoods: 0
+  particles: {fileID: 0}
+  lightObject: {fileID: 1983770681}
+  objectsToSpawn: []
+  overallHits: 15
   sockets:
   - {fileID: 1168577459}
   - {fileID: 1384265842}
   - {fileID: 897669932}
   - {fileID: 267393866}
   - {fileID: 1290054110}
+--- !u!65 &1940790048
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940790045}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1952380945
 GameObject:
   m_ObjectHideFlags: 0
@@ -33587,7 +33610,7 @@ GameObject:
   - component: {fileID: 1971450481}
   - component: {fileID: 1971450480}
   m_Layer: 0
-  m_Name: Area Light (3)
+  m_Name: Tool Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33601,7 +33624,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971450478}
   m_LocalRotation: {x: 0.7118868, y: 0.37272632, z: -0.34358582, w: 0.48604643}
-  m_LocalPosition: {x: -14.150782, y: 2.652, z: -11.939981}
+  m_LocalPosition: {x: -14.150782, y: 3.819, z: -11.939981}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -33646,7 +33669,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -33688,7 +33711,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
+  m_ShadowRadius: 2
   m_ShadowAngle: 0
 --- !u!1 &1983770681
 GameObject:
@@ -33702,7 +33725,7 @@ GameObject:
   - component: {fileID: 1983770683}
   - component: {fileID: 1983770684}
   m_Layer: 0
-  m_Name: Light
+  m_Name: Fire Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33716,12 +33739,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983770681}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0181, z: 0.0094}
+  m_LocalPosition: {x: -14.912, y: 0.6215, z: -3.291}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6866318409800021238}
-  m_RootOrder: 17
+  m_Father: {fileID: 1358952364}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &1983770683
 Light:
@@ -33734,9 +33757,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.50728744, b: 0, a: 1}
-  m_Intensity: 1
-  m_Range: 7.47
+  m_Color: {r: 1, g: 0.5058824, b: 0, a: 0.29803923}
+  m_Intensity: 0.46
+  m_Range: 5.29
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -33744,7 +33767,7 @@ Light:
     m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.115
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -33777,8 +33800,8 @@ Light:
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
+  m_BounceIntensity: 0.52
+  m_ColorTemperature: 3907
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -33799,7 +33822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 1
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 0
   m_LightLayerMask: 1
   m_CustomShadowLayers: 0
   m_ShadowLayerMask: 1
@@ -35268,6 +35291,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2145687590}
   - component: {fileID: 2145687591}
+  - component: {fileID: 2145687592}
   m_Layer: 0
   m_Name: PlaceCauldronAtForge
   m_TagString: Untagged
@@ -35305,7 +35329,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quest: {fileID: 11400000, guid: 1e2aa6750a561cd44a53880224a18711, type: 2}
   Reward: {fileID: 286994339}
-  potLight: {fileID: 654482537}
+  particles: {fileID: 0}
+  lightObject: {fileID: 654482537}
+  objectsToSpawn: []
+  overallHits: 15
+--- !u!65 &2145687592
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145687589}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &4912006682807123
 Transform:
   m_ObjectHideFlags: 0
@@ -46591,7 +46631,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &2325820142567954476
 MeshRenderer:
@@ -62391,7 +62431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7505902739612905361}
   m_LocalRotation: {x: -0.6434806, y: -0.2931429, z: -0.2931429, w: 0.6434806}
-  m_LocalPosition: {x: -0.15600729, y: -2.771, z: -1.1364775}
+  m_LocalPosition: {x: 0.088, y: -2.771, z: -0.724}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -64569,7 +64609,6 @@ Transform:
   - {fileID: 914095289311752811}
   - {fileID: 388996385152509986}
   - {fileID: 7188453929459194047}
-  - {fileID: 1983770682}
   m_Father: {fileID: 299813192}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 32.567, z: 0}
@@ -66891,7 +66930,7 @@ MonoBehaviour:
   durationHover: 0.1
   amplitudeGrabValue: 0.3
   durationGrab: 0.5
-  isLeftHand: 0
+  isLeftHand: 1
 --- !u!114 &8258185661830405007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67091,14 +67130,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5436089285384267979}
-  m_LocalRotation: {x: -0.69560915, y: 0.12699567, z: 0.12699567, w: 0.69560915}
-  m_LocalPosition: {x: 20.621613, y: -31.539701, z: -3.4947307}
+  m_LocalRotation: {x: -0.65512663, y: -0.26609975, z: -0.26609975, w: 0.65512663}
+  m_LocalPosition: {x: 20.9141, y: -31.539701, z: -3.3432}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5149308267270094148}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 20.693}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -44.212}
 --- !u!4 &8332007057549014699
 Transform:
   m_ObjectHideFlags: 0

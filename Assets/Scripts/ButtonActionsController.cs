@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ButtonActionsController : MonoBehaviour
@@ -46,10 +43,7 @@ public class ButtonActionsController : MonoBehaviour
     {
         ButtonControllersInput();
         MotionSwitchHandler();
-
-
     }
-
     public void ButtonControllersInput()
     {
         bool move = mover.leftHandMoveAction.action.IsInProgress();
@@ -59,11 +53,12 @@ public class ButtonActionsController : MonoBehaviour
         }
         foreach (var buttons in inputButtonAction)
         {
-                bool buttonAPressed = inputButtonAction[1].action.IsPressed();                
-                bool buttonBPressed = inputButtonAction[0].action.IsPressed();
-                bool buttonXPressed = inputButtonAction[2].action.IsPressed();
-                bool buttonYPressed = inputButtonAction[3].action.IsPressed();
-                bool buttonSelectInProgress = inputButtonAction[5].action.inProgress;
+            bool buttonBPressed = inputButtonAction[0].action.IsPressed();
+            bool buttonAPressed = inputButtonAction[1].action.IsPressed();                            
+            bool buttonXPressed = inputButtonAction[2].action.IsPressed();
+            bool buttonYPressed = inputButtonAction[3].action.IsPressed();
+            bool rightStick =     inputButtonAction[4].action.inProgress;
+            bool buttonSelectInProgress = inputButtonAction[5].action.inProgress;
 
             ///////// B BUTTON \\\\\\\\
             
@@ -88,39 +83,38 @@ public class ButtonActionsController : MonoBehaviour
                 }
             }
 
-
             ///////// X BUTTON \\\\\\\\\
             if (buttonXPressed == true)
+            {
+                if(activateCanvasUI != null)
                 {
-                    if(activateCanvasUI != null)
-                    {
-                        activateCanvasUI(true);
-                    }
+                    activateCanvasUI(true);
+                }
                     
-                }                
+            }                
 
-                ///////// Y BUTTON \\\\\\\\\
-                if (buttonYPressed)
+            ///////// Y BUTTON \\\\\\\\\
+            if (buttonYPressed)
+            {
+                print("You Pressed " + inputButtonAction[3].action.name);
+                print("Exit");
+                if(yButton != null)
                 {
-                    print("You Pressed " + inputButtonAction[3].action.name);
-                    print("Exit");
-                    if(yButton != null)
-                    {
-                        yButton();
-                    }  
-                }
-                ///////// RIGHT TRIGGER \\\\\\\\\    
-                if (UIHandCanvas != null)
+                    yButton();
+                }  
+            }
+            ///////// RIGHT TRIGGER \\\\\\\\\    
+            if (UIHandCanvas != null)
+            {
+                if (buttonSelectInProgress == true)
                 {
-                    if (buttonSelectInProgress == true)
-                    {
-                        UIHandCanvas(true);
-                    }
-                    else 
-                    {
-                        UIHandCanvas(false);
-                    }
+                    UIHandCanvas(true);
                 }
+                else 
+                {
+                    UIHandCanvas(false);
+                }
+            }
         }
     }
 
@@ -129,7 +123,7 @@ public class ButtonActionsController : MonoBehaviour
         isArea = FindObjectOfType<TeleportSwitch>().isInTeleportState;
         isHittingPlaneCheck = FindObjectOfType<TeleportSwitch>().IsHittingPlane;
 
-        if(inputButtonAction[4].action.IsPressed() || isArea == true && isHittingPlaneCheck == true && leftGrip.action.IsPressed())
+        if(inputButtonAction[4].action.inProgress || isArea == true && isHittingPlaneCheck == true && leftGrip.action.IsPressed())
         {
             if(MotionSickVignetteTrigger != null)
             {

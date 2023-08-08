@@ -5,10 +5,16 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    public float timeRemaining = 10;
-    public bool timerIsRunning = false;
-    public TMP_Text timeText;
+    /// <summary>
+    /// A Class that is responsible for calculating and displaying the remaining time
+    /// Also checks and gives the event when the action is completed to jump to the next quest
+    /// </summary>
+    private float timeRemaining = 10;
+    private bool timerIsRunning = false;
+
+    [SerializeField] private TMP_Text timeText;
     public Quest.Achivement smeltAchieved;
+    
     SmelterHandler smelterHandler;
     private void Awake()
     {
@@ -16,12 +22,19 @@ public class Timer : MonoBehaviour
     }
     private void OnEnable()
     {
-        
-        // Starts the timer automatically
         timerIsRunning = true;
     }
+    /// <summary>
+    /// OnENable
+    /// Boolean check for timer to be active and run when the gameobject is enabled by another script
+    /// 
+    /// Update
+    /// In the Update method it is calculated when the timer is bigger than zero to decreasing and when this 
+    /// comes at zero value, stops the timer, and sends the event to the quest giver subscriber
+    /// </summary>
     void Update()
     {
+        
         if (timerIsRunning)
         {
             if (timeRemaining > 0)
@@ -45,6 +58,12 @@ public class Timer : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Method to Display decreasing time counter in the UI. 
+    /// </summary>
+    /// <param name="timeToDisplay"></param>
+    
     void DisplayTime(float timeToDisplay)
     {
         timeToDisplay += 1;

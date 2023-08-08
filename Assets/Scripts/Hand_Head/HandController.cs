@@ -28,8 +28,7 @@ public class HandController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {       
         controller = GetComponent<ActionBasedController>();
         rayLineInteractor = GetComponent<XRInteractorLineVisual>();
         hapticsController = FindObjectOfType<HapticsController>();
@@ -41,8 +40,6 @@ public class HandController : MonoBehaviour
         hand.SetGrip(controller.selectAction.action.ReadValue<float>());
         hand.SetTrigger(controller.activateAction.action.ReadValue<float>());
     }
-
-
     public void OnHoverLight(bool hovering)
     {
         rayLineInteractor.validColorGradient.SetKeys

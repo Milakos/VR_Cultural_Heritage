@@ -2,24 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaceCauldronHandler : MonoBehaviour
+public class PlaceCauldronHandler : QuestBase
 {
-    public QuestSO quest;
-    public GameObject Reward;
-    public GameObject potLight;
+    /*public GameObject potLight;*/
 
     public Quest.Achivement PotPlacedAchievement;
-
-    private void Start()
+    public override void Awake()
     {
-        potLight.SetActive(false);
-        Reward.SetActive(false);
+        base.Awake();
+    }
+    public override void Start()
+    {
+        base.Start();
+        /*potLight.SetActive(false);*/
     }
     public void PlaceCauldron() 
     {
         if (PotPlacedAchievement != null) 
         {
-            potLight.SetActive(true);
+            lightObject.SetActive(true);
             PotPlacedAchievement(quest, true, Reward);
         }
     }
