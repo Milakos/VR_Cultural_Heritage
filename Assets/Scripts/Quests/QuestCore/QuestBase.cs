@@ -6,7 +6,7 @@ using UnityEngine;
 /// It is required from any gameobject that will inherit logic from this class to has a boxCollider componenet 
 /// </summary>
 [RequireComponent(typeof(BoxCollider))]
-public class QuestBase : MonoBehaviour
+public class QuestBase : MonoBehaviour, IQuest
 {
     /// <summary>
     /// A Quest Base that will be inherited from diferent quest Handlers 
@@ -31,12 +31,13 @@ public class QuestBase : MonoBehaviour
     [Space(10)]
     [Tooltip("The maximum amount that will be needed by hitting object")]
     [SerializeField] protected int overallHits = 15;
-    
+    [Header("Audio")]
+    [Space(10)]
     //Various counters for mathematical implementation
     protected int hit = 0;
     protected int totalAmountLeft;
     protected int objectCounter = 0;
-
+    
     /// <summary>
     /// In the awake method we evaluate the box collider and the boolean isTrigger as true
     /// to prevent it from collision and physics event with colliders
@@ -54,6 +55,8 @@ public class QuestBase : MonoBehaviour
     /// </summary>
     public virtual void Start()
     {
+        StartQuest();
+
         if (Reward != null)
             Reward.SetActive(false);
         if (lightObject != null)
@@ -63,6 +66,10 @@ public class QuestBase : MonoBehaviour
         {
             SpawnObject(obj, false);
         }
+    }
+    public virtual void Update() 
+    {
+        QuestInProgress();
     }
     /// <summary>
     /// A virtual OntiggerEnterMethod that checks if the objects that overrides this method collides
@@ -82,5 +89,11 @@ public class QuestBase : MonoBehaviour
     {
         obj.SetActive(visible);
     }
+
+    public virtual void StartQuest(){}
+
+    public virtual void QuestInProgress(){}
+
+    public virtual void EndQuest(){}
 }
 

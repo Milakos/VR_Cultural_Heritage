@@ -28,6 +28,7 @@ public class QuestGiver : MonoBehaviour
         timer.smeltAchieved += UpdateQuestProgress;
         FindObjectOfType<LightFireHandler>().woodAchieved += UpdateQuestProgress;
         FindObjectOfType<PlaceCauldronHandler>().PotPlacedAchievement += UpdateQuestProgress;
+        FindObjectOfType<HammeringQuestHandler>().hammeringSilver += UpdateQuestProgress;
 
         anim = GetComponentInChildren<Animator>();
     }
@@ -81,11 +82,13 @@ public class QuestGiver : MonoBehaviour
         if (quest == currentQuest[currentQuestIndex] && completed)
         {
             /*reward[nextIndex].SetActive(true);*/
-            if(reward != null)
+            if (reward != null)
                 reward.SetActive(true);
 
             currentQuest.Remove(quest);
-            nextIndex++;
+
+            if (nextIndex < quests.Count)
+                nextIndex++;
 
             if (HasQuestsRemain())
             {
@@ -93,10 +96,14 @@ public class QuestGiver : MonoBehaviour
                 questDisplay.Quest(quests[nextIndex].questName, quests[nextIndex].description);
                 print("New Quest");
             }
-            else 
+            else
             {
                 print("No more Quests");
-            }           
+            }
+        }
+        else
+        {
+            print("You Finish");
         }
     }
     /// <summary>

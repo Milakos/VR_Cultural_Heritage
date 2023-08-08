@@ -24,6 +24,10 @@ public class TreeHandler : QuestBase
     {
         base.Start();
     }
+    public override void Update()
+    {
+        base.Update();
+    }
     public override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Axe"))
@@ -49,12 +53,23 @@ public class TreeHandler : QuestBase
                 {
                     print("Quest Completed");
                     treeAchieved(quest, true, null);
-                    
                 }
             }
             if (objectCounter < objectsToSpawn.Length - 1)
                 objectCounter++;
             print("Axe INteracted with Tree");
         }
+    }
+    public override void StartQuest()
+    {
+        base.StartQuest();
+    }
+    public override void QuestInProgress()
+    {
+        base.QuestInProgress();
+    }
+    public override void EndQuest()
+    {
+        base.EndQuest();
     }
 }

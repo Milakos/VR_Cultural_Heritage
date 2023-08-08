@@ -16,6 +16,10 @@ public class Timer : MonoBehaviour
     public Quest.Achivement smeltAchieved;
     
     SmelterHandler smelterHandler;
+
+    [SerializeField] GameObject existedCauldron;
+    [SerializeField] GameObject newCauldron;
+
     private void Awake()
     {
         smelterHandler = FindObjectOfType<SmelterHandler>();
@@ -51,6 +55,9 @@ public class Timer : MonoBehaviour
                 {
                     if (smeltAchieved != null)
                     {
+                        existedCauldron.SetActive(false);
+                        newCauldron.SetActive(true);
+                        
                         smeltAchieved(smelterHandler.quest, true, smelterHandler.Reward);
                     }
                     Destroy(this.gameObject);
