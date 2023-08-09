@@ -7,13 +7,13 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.DD5CDD96" = "LIght"
+	"last_search.DD5CDD96" = "fx"
 	"OpenInspectorPreview.DD5CDD96" = "0"
 	"currentGroup.DD5CDD96" = "scene"
-	"last_search.F8949528" = "LIght"
+	"last_search.F8949528" = "fx"
 	"OpenInspectorPreview.F8949528" = "0"
 	"currentGroup.F8949528" = "scene"
-	"last_search.2138236A" = "LIght"
+	"last_search.2138236A" = "fx"
 	"OpenInspectorPreview.2138236A" = "0"
 	"currentGroup.2138236A" = "asset"
 }
@@ -62,6 +62,7 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"VF"
 ]
 searchItemFavorites = [
 ]

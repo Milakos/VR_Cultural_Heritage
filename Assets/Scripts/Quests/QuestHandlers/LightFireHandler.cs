@@ -23,17 +23,39 @@ public class LightFireHandler : QuestBase
     {
         base.Start();
     }
+    public override void Update()
+    {
+        base.Update();
+    }
     public void RemoveItemFromList(XRSocketInteractor socketItem) 
     {
         totalAmountLeft--;
         XRSockets.Remove(socketItem);
         if (XRSockets.Count == 0 && totalAmountLeft == 0) 
         {
-            lightObject.SetActive(true);
-                if(woodAchieved != null)
-                    woodAchieved(quest, true, Reward);            
-            print("No more items");
+            EndQuest();
         }
     }
 
+    public override void StartQuest()
+    {
+        base.StartQuest();
+    }
+    public override void QuestInProgress()
+    {
+        base.QuestInProgress();
+    }
+    public override void EndQuest()
+    {
+        lightObject.SetActive(true);
+        particles.Play();
+        
+        if (woodAchieved != null)
+        {
+            woodAchieved(quest, true, Reward);
+        }
+
+        print("No more items");
+        base.EndQuest();
+    }
 }

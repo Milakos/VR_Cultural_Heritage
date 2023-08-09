@@ -25,27 +25,41 @@ public class RockHandler : QuestBase
                 hit++;
                 if (hit >= overallHits)
                 {
-                    particles.Play();
-
-                    base.SpawnObject(objectsToSpawn[objectCounter], true);
-
-                    print("You take Silver Ore");
-                    hit = 0;
-
-                    totalAmountLeft--;
+                    QuestInProgress();
                 }
             }
             if (totalAmountLeft == 0)
             {
-                if (rocksAchieved != null)
-                {
-                    rocksAchieved(quest, true, Reward);
-                }
+                EndQuest();
             }
             if (objectCounter < objectsToSpawn.Length - 1)
                 objectCounter++;
             
             print("Axe INteracted with Rock");
         }
+    }
+    public override void StartQuest()
+    {
+        base.StartQuest();
+    }
+    public override void QuestInProgress()
+    {
+        particles.Play();
+
+        base.SpawnObject(objectsToSpawn[objectCounter], true);
+
+        print("You take Silver Ore");
+        hit = 0;
+
+        totalAmountLeft--;
+        base.QuestInProgress();
+    }
+    public override void EndQuest()
+    {
+        if (rocksAchieved != null)
+        {
+            rocksAchieved(quest, true, Reward);
+        }
+        base.EndQuest();
     }
 }

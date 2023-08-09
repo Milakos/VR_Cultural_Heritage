@@ -37,23 +37,12 @@ public class TreeHandler : QuestBase
                 hit++;
                 if (hit >= overallHits)
                 {
-                    particles.Play();
-
-                    base.SpawnObject(objectsToSpawn[objectCounter], true);
-
-                    print("You take Tree wood branches");
-                    hit = 0;
-
-                    totalAmountLeft--;
+                    QuestInProgress();
                 }
             }
             if (totalAmountLeft == 0)
             {
-                if (treeAchieved != null)
-                {
-                    print("Quest Completed");
-                    treeAchieved(quest, true, null);
-                }
+                EndQuest();
             }
             if (objectCounter < objectsToSpawn.Length - 1)
                 objectCounter++;
@@ -66,10 +55,23 @@ public class TreeHandler : QuestBase
     }
     public override void QuestInProgress()
     {
+        particles.Play();
+
+        base.SpawnObject(objectsToSpawn[objectCounter], true);
+
+        print("You take Tree wood branches");
+        hit = 0;
+
+        totalAmountLeft--;
         base.QuestInProgress();
     }
     public override void EndQuest()
     {
+        if (treeAchieved != null)
+        {
+            print("Quest Completed");
+            treeAchieved(quest, true, null);
+        }
         base.EndQuest();
     }
 }

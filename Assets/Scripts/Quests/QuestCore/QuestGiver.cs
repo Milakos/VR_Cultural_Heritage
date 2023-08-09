@@ -14,6 +14,7 @@ public class QuestGiver : MonoBehaviour
     // List that will only contain one element that will be added and removed
     //showing the current Quest
     public List<QuestSO> currentQuest = new List<QuestSO>();
+    public QuestSO final;
 
     [SerializeField] private Timer timer;
 
@@ -29,6 +30,8 @@ public class QuestGiver : MonoBehaviour
         FindObjectOfType<LightFireHandler>().woodAchieved += UpdateQuestProgress;
         FindObjectOfType<PlaceCauldronHandler>().PotPlacedAchievement += UpdateQuestProgress;
         FindObjectOfType<HammeringQuestHandler>().hammeringSilver += UpdateQuestProgress;
+        FindObjectOfType<CarvingSilverSheetHandler>().carvAchieved += UpdateQuestProgress;
+        FindObjectOfType<CutWithSawHandler>().cutAchieved += UpdateQuestProgress;
 
         anim = GetComponentInChildren<Animator>();
     }
@@ -103,6 +106,7 @@ public class QuestGiver : MonoBehaviour
         }
         else
         {
+            questDisplay.Quest(final.questName, final.description);
             print("You Finish");
         }
     }

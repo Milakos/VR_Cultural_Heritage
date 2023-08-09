@@ -6,6 +6,7 @@ using UnityEngine;
 /// It is required from any gameobject that will inherit logic from this class to has a boxCollider componenet 
 /// </summary>
 [RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(AudioSource))]
 public class QuestBase : MonoBehaviour, IQuest
 {
     /// <summary>
@@ -25,6 +26,8 @@ public class QuestBase : MonoBehaviour, IQuest
     [SerializeField] protected ParticleSystem particles;
     [Space(10)]
     [SerializeField] protected GameObject lightObject;
+    [Space(10)]
+    [SerializeField] protected AudioSource audioSource;
     [Space(10)]
     [Tooltip("Insert game objects as part of the game mechanic logic that will be activated when they needed. it is not mandadory")]
     [SerializeField] protected GameObject[] objectsToSpawn;
@@ -48,6 +51,8 @@ public class QuestBase : MonoBehaviour, IQuest
     {
         totalAmountLeft = quest.targetAmount;
         GetComponent<BoxCollider>().isTrigger = true;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
     }
     /// <summary>
     /// checking null refrences of the reward and setting it as a non active object.
@@ -62,6 +67,7 @@ public class QuestBase : MonoBehaviour, IQuest
         if (lightObject != null)
             lightObject.SetActive(false);
         
+        
         foreach (GameObject obj in objectsToSpawn)
         {
             SpawnObject(obj, false);
@@ -69,7 +75,7 @@ public class QuestBase : MonoBehaviour, IQuest
     }
     public virtual void Update() 
     {
-        QuestInProgress();
+        
     }
     /// <summary>
     /// A virtual OntiggerEnterMethod that checks if the objects that overrides this method collides

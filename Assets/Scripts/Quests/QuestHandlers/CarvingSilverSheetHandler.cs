@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HammeringQuestHandler : QuestBase
+public class CarvingSilverSheetHandler : QuestBase
 {
+    public Quest.Achivement carvAchieved;
     [SerializeField] GameObject Ingot;
-    Vector3 finalScale;    
-    public Quest.Achivement hammeringSilver;
     [SerializeField] private Material m_CarvedSilver;
+
     public override void Awake()
     {
         base.Awake();
@@ -16,20 +16,29 @@ public class HammeringQuestHandler : QuestBase
     {
         base.Start();
     }
+    public override void StartQuest()
+    {
+        base.StartQuest();
+    }
+    public override void QuestInProgress()
+    {
+        hit = 0;
+
+        totalAmountLeft--;
+        base.QuestInProgress();
+    }
     public override void Update()
     {
         base.Update();
     }
     public override void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hammer"))
+        if (other.CompareTag("ScrewDriver")) 
         {
             if (hit < overallHits)
             {
                 hit++;
-                
-                CalculateIngotScale();                
-                
+
                 if (hit >= overallHits)
                 {
                     QuestInProgress();
@@ -39,40 +48,20 @@ public class HammeringQuestHandler : QuestBase
             {
                 EndQuest();
             }
-            if (objectCounter < objectsToSpawn.Length - 1)
-                objectCounter++;
+            print("ScrewDriver Interacted with Silver");
 
-            print("Hammer Interacted With Ingot");
         }
         base.OnTriggerEnter(other);
-    }
-    public override void StartQuest()
-    {
-        base.StartQuest();
-    }
-    public override void QuestInProgress()
-    {
-        particles.Play();
-
-        print("You Hammer Silver Ingot");
-        hit = 0;
-
-        totalAmountLeft--;
-        base.QuestInProgress();
     }
     public override void EndQuest()
     {
         Ingot.GetComponent<MeshRenderer>().material = m_CarvedSilver;
 
-        if (hammeringSilver != null)
+        if (carvAchieved != null)
         {
-            hammeringSilver(quest, true, Reward);
+            print("Quest Completed");
+            carvAchieved(quest, true, Reward);
         }
         base.EndQuest();
-    }
-    void CalculateIngotScale() 
-    {
-        finalScale = new Vector3(0.03f, -0.001f, 0.05f);
-        Ingot.transform.localScale += finalScale;
     }
 }

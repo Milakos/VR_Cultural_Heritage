@@ -12,6 +12,8 @@ TagManager:
   - Rocks
   - Hammer
   - Forge
+  - Saw
+  - ScrewDriver
   layers:
   - Default
   - TransparentFX
