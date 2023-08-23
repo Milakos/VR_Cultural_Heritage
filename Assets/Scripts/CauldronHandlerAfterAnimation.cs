@@ -8,14 +8,17 @@ public class CauldronHandlerAfterAnimation : MonoBehaviour
     [SerializeField] private GameObject SmeltedIngot;
     [SerializeField] private ParticleSystem particle;
     public MeshRenderer ren;
+    [SerializeField] SmelterHandler smelter;
     private void Awake()
     {
         SmeltedIngot.SetActive(false);
         this.gameObject.SetActive(false);
+
     }
     public void ParticlePlay() 
     {
         particle.Play();
+        smelter.AudioReward();
     }
     public IEnumerator WaitTimeUntilDestory() 
     {

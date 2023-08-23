@@ -7,7 +7,6 @@ public class LightFireHandler : QuestBase
 {
     [SerializeField] private XRSocketInteractor[] sockets;
     private List<XRSocketInteractor> XRSockets = new List<XRSocketInteractor>();
-
     public Quest.Achivement woodAchieved;
 
     public override void Awake()
@@ -31,6 +30,7 @@ public class LightFireHandler : QuestBase
     {
         totalAmountLeft--;
         XRSockets.Remove(socketItem);
+        AudioEvent();
         if (XRSockets.Count == 0 && totalAmountLeft == 0) 
         {
             EndQuest();
@@ -47,7 +47,9 @@ public class LightFireHandler : QuestBase
     }
     public override void EndQuest()
     {
+        
         lightObject.SetActive(true);
+        AudioReward();
         particles.Play();
         
         if (woodAchieved != null)
@@ -57,5 +59,13 @@ public class LightFireHandler : QuestBase
 
         print("No more items");
         base.EndQuest();
+    }
+    public override void AudioEvent()
+    {
+        base.AudioEvent();
+    }
+    public override void AudioReward()
+    {
+        base.AudioReward();
     }
 }

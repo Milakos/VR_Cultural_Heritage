@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,6 @@ using UnityEngine;
 public class RockHandler : QuestBase
 {
     public Quest.Achivement rocksAchieved;
-
     public override void Awake()
     {
         base.Awake();
@@ -23,6 +23,7 @@ public class RockHandler : QuestBase
             if (hit < overallHits)
             {
                 hit++;
+                AudioEvent();
                 if (hit >= overallHits)
                 {
                     QuestInProgress();
@@ -47,7 +48,9 @@ public class RockHandler : QuestBase
         particles.Play();
 
         base.SpawnObject(objectsToSpawn[objectCounter], true);
-
+        
+        AudioReward();
+        
         print("You take Silver Ore");
         hit = 0;
 
@@ -62,4 +65,13 @@ public class RockHandler : QuestBase
         }
         base.EndQuest();
     }
+    public override void AudioEvent()
+    {
+        base.AudioEvent();
+    }
+    public override void AudioReward()
+    {
+        base.AudioReward();
+    }
+
 }

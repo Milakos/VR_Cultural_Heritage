@@ -14,10 +14,6 @@ public class SmelterHandler : QuestBase
         timer.SetActive(false);
         base.Start();
     }
-    public override void Update()
-    {
-        base.Update();
-    }
     public override void StartQuest()
     {
         base.StartQuest();
@@ -32,8 +28,16 @@ public class SmelterHandler : QuestBase
             timer.SetActive(true);
         base.EndQuest();
     }
-/*    public void SilverPlacedAtTheCauldron() 
+    public override void AudioEvent()
     {
+        base.AudioEvent();
+    }
+    public override void AudioReward()
+    {
+        base.AudioReward();
+    }
+    /*    public void SilverPlacedAtTheCauldron() 
+        {
 
-    }*/
+        }*/
 }

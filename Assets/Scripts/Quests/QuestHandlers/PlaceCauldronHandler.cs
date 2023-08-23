@@ -30,16 +30,26 @@ public class PlaceCauldronHandler : QuestBase
         if (PotPlacedAchievement != null)
         {
             lightObject.SetActive(true);
+            AudioEvent();
+            AudioReward();
             PotPlacedAchievement(quest, true, Reward);
         }
         base.EndQuest();
     }
-/*    public void PlaceCauldron() 
+    public override void AudioEvent()
     {
-        if (PotPlacedAchievement != null) 
+        base.AudioEvent();
+    }
+    public override void AudioReward()
+    {
+        base.AudioReward();
+    }
+    /*    public void PlaceCauldron() 
         {
-            lightObject.SetActive(true);
-            PotPlacedAchievement(quest, true, Reward);
-        }
-    }*/
+            if (PotPlacedAchievement != null) 
+            {
+                lightObject.SetActive(true);
+                PotPlacedAchievement(quest, true, Reward);
+            }
+        }*/
 }

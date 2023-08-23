@@ -27,7 +27,7 @@ public class HammeringQuestHandler : QuestBase
             if (hit < overallHits)
             {
                 hit++;
-                
+                AudioEvent();
                 CalculateIngotScale();                
                 
                 if (hit >= overallHits)
@@ -74,5 +74,9 @@ public class HammeringQuestHandler : QuestBase
     {
         finalScale = new Vector3(0.03f, -0.001f, 0.05f);
         Ingot.transform.localScale += finalScale;
+    }
+    public override void AudioEvent()
+    {
+        base.AudioEvent();
     }
 }

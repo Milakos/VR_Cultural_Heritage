@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,6 @@ using UnityEngine;
 /// It is required from any gameobject that will inherit logic from this class to has a boxCollider componenet 
 /// </summary>
 [RequireComponent(typeof(BoxCollider))]
-[RequireComponent(typeof(AudioSource))]
 public class QuestBase : MonoBehaviour, IQuest
 {
     /// <summary>
@@ -27,15 +27,14 @@ public class QuestBase : MonoBehaviour, IQuest
     [Space(10)]
     [SerializeField] protected GameObject lightObject;
     [Space(10)]
-    [SerializeField] protected AudioSource audioSource;
-    [Space(10)]
     [Tooltip("Insert game objects as part of the game mechanic logic that will be activated when they needed. it is not mandadory")]
     [SerializeField] protected GameObject[] objectsToSpawn;
     [Space(10)]
     [Tooltip("The maximum amount that will be needed by hitting object")]
     [SerializeField] protected int overallHits = 15;
-    [Header("Audio")]
-    [Space(10)]
+
+    [field: SerializeField] public EventReference TriggerEnter { get; private set; }
+    [field: SerializeField] public EventReference RewardSound { get; private set; }
     //Various counters for mathematical implementation
     protected int hit = 0;
     protected int totalAmountLeft;
@@ -51,8 +50,6 @@ public class QuestBase : MonoBehaviour, IQuest
     {
         totalAmountLeft = quest.targetAmount;
         GetComponent<BoxCollider>().isTrigger = true;
-        audioSource = GetComponent<AudioSource>();
-        audioSource.playOnAwake = false;
     }
     /// <summary>
     /// checking null refrences of the reward and setting it as a non active object.
@@ -66,7 +63,6 @@ public class QuestBase : MonoBehaviour, IQuest
             Reward.SetActive(false);
         if (lightObject != null)
             lightObject.SetActive(false);
-        
         
         foreach (GameObject obj in objectsToSpawn)
         {
@@ -84,6 +80,7 @@ public class QuestBase : MonoBehaviour, IQuest
     /// <param name="other"></param>
     public virtual void OnTriggerEnter(Collider other)
     {
+        
     }
     /// <summary>
     /// A method that is responsible for setting active or inactive the objects that will be spawned
@@ -100,6 +97,21 @@ public class QuestBase : MonoBehaviour, IQuest
 
     public virtual void QuestInProgress(){}
 
-    public virtual void EndQuest(){}
+    public virtual void EndQuest()
+    {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.questComplete, this.transform.position);
+    }
+    public virtual void AudioEvent() 
+    {
+        if (!TriggerEnter.IsNull) 
+        {
+            RuntimeManager.PlayOneShot(TriggerEnter, this.transform.position);
+        }       
+    }
+    public virtual void AudioReward() 
+    {
+        if(!RewardSound.IsNull)
+            RuntimeManager.PlayOneShot(RewardSound, this.transform.position);
+    }
 }
 

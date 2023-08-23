@@ -38,7 +38,7 @@ public class CarvingSilverSheetHandler : QuestBase
             if (hit < overallHits)
             {
                 hit++;
-
+                AudioEvent();
                 if (hit >= overallHits)
                 {
                     QuestInProgress();
@@ -63,5 +63,9 @@ public class CarvingSilverSheetHandler : QuestBase
             carvAchieved(quest, true, Reward);
         }
         base.EndQuest();
+    }
+    public override void AudioEvent()
+    {
+        base.AudioEvent();
     }
 }

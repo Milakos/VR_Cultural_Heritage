@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,8 +36,10 @@ public class TreeHandler : QuestBase
             if (hit < overallHits)
             {
                 hit++;
+                AudioEvent();
                 if (hit >= overallHits)
                 {
+                   
                     QuestInProgress();
                 }
             }
@@ -47,7 +50,9 @@ public class TreeHandler : QuestBase
             if (objectCounter < objectsToSpawn.Length - 1)
                 objectCounter++;
             print("Axe INteracted with Tree");
+            
         }
+        base.OnTriggerEnter(other);
     }
     public override void StartQuest()
     {
@@ -56,7 +61,7 @@ public class TreeHandler : QuestBase
     public override void QuestInProgress()
     {
         particles.Play();
-
+        AudioReward();
         base.SpawnObject(objectsToSpawn[objectCounter], true);
 
         print("You take Tree wood branches");
@@ -73,5 +78,14 @@ public class TreeHandler : QuestBase
             treeAchieved(quest, true, null);
         }
         base.EndQuest();
+    }
+
+    public override void AudioEvent()
+    {
+        base.AudioEvent();
+    }
+    public override void AudioReward()
+    {
+        base.AudioReward();
     }
 }
